@@ -1,9 +1,0 @@
-As a <role>, I want <feature> so that <reason>.
-
-
-User Story:
-As a user, I want to filter restaurants by my preferences. 
-
-Description:
-During the sign up process, a new user will complete a small questionnaire (in the multiple-choice format) regarding current food preference and any dietary restrictions. If everything goes right, the web will display a list of restaurants, within the specified miles of radius, that meets the user's preference input. For example, if the user marks vegan or gluten free in the survey, the web will then show a list of vegan restaurants or places with gluten free dishes on the menu. The system will remember the preference and apply automatically when the user comes back after the first time. Additionally, an already logged in user can choose to filter out restaurants based on interested cuisine or dietary restrictions after a list of places is generated, just in case the logged in user's preference is different from the initial survey answers. If there is no restaurants nearby (the user will define how close is nearby within the web page) that meet the preference, the web will show an error message: "Seems like there is nothing that meets your standards nearby, try to change your preference or the maximum miles you want to travel for food. :)"
-
