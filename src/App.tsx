@@ -1,7 +1,9 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import { Fetch } from "react-request";
+import "./App.css";
 
-import logo from './logo.svg';
+
+import logo from "./logo.svg";
 
 class App extends React.Component {
   public render() {
@@ -9,11 +11,32 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to UberEatsOut</h1>
+          <h2>~ Making great API calls since 1969 ~</h2>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+
+        <Fetch url="https://jsonplaceholder.typicode.com/posts/1">
+          {({ fetching, failed, data }: any) => {
+            if (fetching) {
+              return <div>Loading data...</div>;
+            }
+
+            if (failed) {
+              return <div>The request did not succeed.</div>;
+            }
+
+            if (data) {
+              return (
+                <div className="App-intro">
+                  <div>Post ID: {data.id}</div>
+                  <div>Post Title: {data.title}</div>
+                </div>
+              );
+            }
+
+            return null;
+          }}
+        </Fetch>
       </div>
     );
   }

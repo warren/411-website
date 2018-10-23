@@ -3,6 +3,14 @@ Website about food or classes (but not both)
 
 Team members: Warren Partridge, Ferris Armstrong, Jessie Fu, Joanne Chen
 
+To run the site:
+- Clone the repo
+- `npm install`
+- `npm start`
+
+
+Don't push API tokens!
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
