@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Fetch } from "react-request";
+import YelpKey from "static/keys/yelpKey.txt"; // Todo: Make this work
 import "./App.css";
 
 
@@ -12,10 +13,15 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to UberEatsOut</h1>
-          <h2>~ Making great API calls since 1969 ~</h2>
+          <h3>~ Making great API calls since 1969 ~</h3>
         </header>
 
-        <Fetch url="https://jsonplaceholder.typicode.com/posts/1">
+        <Fetch url="https://api.yelp.com/v3/businesses/search" // Todo: make me work
+               credentials="same-origin"
+               headers={{
+                   'Access-Control-Allow-Origin': '*',
+                   'csrf-token': {YelpKey},
+               }}>
           {({ fetching, failed, data }: any) => {
             if (fetching) {
               return <div>Loading data...</div>;
@@ -37,6 +43,7 @@ class App extends React.Component {
             return null;
           }}
         </Fetch>
+          <p>{YelpKey}</p>
       </div>
     );
   }
