@@ -12,13 +12,22 @@ const config = {
   }
 };
 
-class Yelp extends React.Component<{}> {
+interface State {
+    restaurant: string;
+}
 
-    handleClick = () => {
+class Yelp extends React.Component<{}, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = { restaurant: "false" }
+    } 
+
+
+    public handleClick = () => {
         axios.get('https://developers.zomato.com/api/v2.1/search', config).then(response => console.log(response))
     }
 
-    render() {
+    public render() {
         return (
             <>
                 <button onClick={this.handleClick}> 
