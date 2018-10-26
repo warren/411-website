@@ -1,7 +1,12 @@
 import axios from 'axios';
 import * as React from 'react';
+import styled from 'react-emotion';
 import Card from './Card';
 
+
+interface Location {
+    address: string
+}
 
 interface UserRating {
     aggregate_rating: string;
@@ -9,7 +14,7 @@ interface UserRating {
 
 interface RestaurantData {
     name: string;
-    address: string;
+    location: Location;
     user_rating: UserRating;
 }
 
@@ -22,19 +27,11 @@ interface State {
     search: string;
 }
 
+const Section = styled('div')`
+    margin: 50px;
+`;
+
 class Yelp extends React.Component<{}, State> {
-
-    private config = {
-        headers: {
-          'user-key': '8edd353f12508deb070e86bf37a9b824',
-        },
-        params: {
-          count: 50, // limit to 50 objects
-          entity_id: 289, // Boston
-          q: 'tacos', // search keyword
-        }
-    };
-
     constructor(props: any) {
         super(props);
         this.state = { 
@@ -42,6 +39,18 @@ class Yelp extends React.Component<{}, State> {
             search: "tacos"
         }
     } 
+
+    public config = {
+        headers: {
+          'user-key': '8edd353f12508deb070e86bf37a9b824',
+        },
+        params: {
+          count: 50, // limit to 50 objects
+          entity_id: 289, // Boston
+          q: "tacos", // search keyword
+        }
+    };
+
 
 
     public handleClick = () => {
@@ -62,13 +71,13 @@ class Yelp extends React.Component<{}, State> {
             <>
                 {
                     this.state.restaurant.map((item, key) => 
-                        <div key={key}>
+                        <Section key={key}>
                             <Card 
                                 name={item.restaurant.name} 
-                                address={item.restaurant.address} 
+                                address={item.restaurant.location.address} 
                                 rating={item.restaurant.user_rating.aggregate_rating}  
                             />
-                        </div>
+                        </Section>
                 )}
                 <button onClick={this.handleClick}> 
                 Click me
