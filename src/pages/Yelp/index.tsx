@@ -36,7 +36,8 @@ const SearchButton = styled('button')`
     border-radius: 25px;
     background-color: #00000000;
     color: #FFF;
-    padding: 30px;
+    padding: 30px 45px;
+    font-size: 20px;
 `;
 
 class Yelp extends React.Component<{}, State> {
