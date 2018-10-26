@@ -1,22 +1,27 @@
 import * as React from 'react';
+import styled from 'react-emotion';
 import './App.css';
+import { Yelp } from "./pages";
 
-import logo from './logo.svg';
+const FeaturedText = styled('h1')`
+    text-align: center;
+    color: #FFF;
+    font-size: 50px;
+`;
 
-class App extends React.Component {
-  public render() {
+const Section = styled('div')`
+    text-align: center;
+`;
+
+const App: React.SFC = () => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <>
+        <FeaturedText>Zomato API</FeaturedText>
+        <Section>
+          <Yelp />
+        </Section>
+      </>
     );
-  }
 }
 
 export default App;
