@@ -3,6 +3,7 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
 
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 interface Location {
     address: string
@@ -24,7 +25,6 @@ interface Restaurant {
 
 interface State {
     restaurant: Restaurant[];
-    search: string;
 }
 
 const Section = styled('div')`
@@ -50,44 +50,39 @@ const SearchBox = styled('input')`
 `;
 
 class Yelp extends React.Component<{}, State> {
-    constructor(props: any) {
-        super(props);
-        this.state = { 
-            restaurant: [],
-            search: ""
-        }
-    } 
-
     public config = {
         headers: {
-          'user-key': '8edd353f12508deb070e86bf37a9b824',
+          'user-key': API_KEY,
         },
         params: {
           count: 50, // limit to 50 objects
           entity_id: 289, // Boston
-          q: "tacos", // search keyword
+          q: 'chinese', // search keyword
         }
     };
 
-
+    constructor(props: any) {
+        super(props);
+        this.state = { 
+            restaurant: [],
+        }
+    } 
 
     public handleClick = () => {
         axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
             const key = "data";
             const data = response[key];
             this.setState({restaurant: data.restaurants});
-            console.log(response);
-            console.log(response[key]);
-            console.log(data.restaurants);
-            console.log(this.state.restaurant);
+            // console.log(response);
+            // console.log(response[key]);
+            // console.log(data.restaurants);
+            // console.log(this.state.restaurant);
             }
         )
     }
 
     public setSearch = (props: any) => {
-        console.log(props.target.value);
         this.config.params.q = props.target.value;
-        console.log(this.config.params.q);
     }
 
     public render() {
