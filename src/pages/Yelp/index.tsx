@@ -31,6 +31,14 @@ const Section = styled('div')`
     margin: 50px;
 `;
 
+const SearchButton = styled('button')`
+    border: 2px solid white;
+    border-radius: 25px;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 30px;
+`;
+
 class Yelp extends React.Component<{}, State> {
     constructor(props: any) {
         super(props);
@@ -69,6 +77,9 @@ class Yelp extends React.Component<{}, State> {
     public render() {
         return (
             <>
+                <SearchButton onClick={this.handleClick}> 
+                    Search
+                </SearchButton>
                 {
                     this.state.restaurant.map((item, key) => 
                         <Section key={key}>
@@ -79,9 +90,6 @@ class Yelp extends React.Component<{}, State> {
                             />
                         </Section>
                 )}
-                <button onClick={this.handleClick}> 
-                Click me
-                </button>
             </>
         );
     }

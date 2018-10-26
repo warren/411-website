@@ -13,6 +13,7 @@ const Section = styled('section')`
     border-radius: 25px;
     background: #FFF;
     width: 50%;
+    opacity: 0.5;
 `;
 
 const Card: React.SFC<Props> = (props) =>{
