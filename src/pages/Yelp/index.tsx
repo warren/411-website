@@ -36,7 +36,16 @@ const SearchButton = styled('button')`
     border-radius: 25px;
     background-color: #00000000;
     color: #FFF;
-    padding: 30px 45px;
+    padding: 10px 30px;
+    font-size: 20px;
+`;
+
+const SearchBox = styled('input')`
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 15px;
+    color: gray;
     font-size: 20px;
 `;
 
@@ -45,7 +54,7 @@ class Yelp extends React.Component<{}, State> {
         super(props);
         this.state = { 
             restaurant: [],
-            search: "tacos"
+            search: ""
         }
     } 
 
@@ -75,9 +84,16 @@ class Yelp extends React.Component<{}, State> {
         )
     }
 
+    public setSearch = (props: any) => {
+        console.log(props.target.value);
+        this.config.params.q = props.target.value;
+        console.log(this.config.params.q);
+    }
+
     public render() {
         return (
             <>
+                <SearchBox type="text" onChange={this.setSearch} />
                 <SearchButton onClick={this.handleClick}> 
                     Search
                 </SearchButton>

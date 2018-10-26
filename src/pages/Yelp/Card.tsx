@@ -22,7 +22,7 @@ const Card: React.SFC<Props> = (props) =>{
             <Section>
                 <h1>{props.name}</h1>
                 <h1>{props.address}</h1>
-                <h1>{props.rating}</h1>
+                <h1>Rating: {props.rating} &#9733;</h1>
             </Section>
         </>
     );
