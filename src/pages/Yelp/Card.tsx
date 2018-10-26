@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'react-emotion';
 
 interface Props {
     name: string;
@@ -6,12 +7,23 @@ interface Props {
     rating: string;
 }
 
+const Section = styled('section')`
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 25px;
+    background: #FFF;
+    width: 50%;
+    opacity: 0.5;
+`;
+
 const Card: React.SFC<Props> = (props) =>{
     return(
         <>
-            <h1>{props.name}</h1>
-            <h1>{props.address}</h1>
-            <h1>{props.rating}</h1>
+            <Section>
+                <h1>{props.name}</h1>
+                <h1>{props.address}</h1>
+                <h1>{props.rating}</h1>
+            </Section>
         </>
     );
 };
