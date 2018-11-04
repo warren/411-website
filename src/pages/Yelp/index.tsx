@@ -1,31 +1,21 @@
 import axios from 'axios';
+// import * as redis from 'redis';
 import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
 
-import { Tedis } from 'tedis';
+// import { Tedis } from 'tedis';
+// import { createHandyClient } from 'handy-redis';
 
 // var redis = require('redis');
 // var redisClient = redis.createClient();
 
+// const client = redis.createClient();
+// client.on('ready', () => {
+//   console.log('redis is ready.')
+// });
+
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-
-
-(async () => {
-  const tedis = new Tedis({
-    host: "127.0.0.1",
-    port: 6379
-  });
-
-    // const client = createHandyClient();
-    // or, call createHandyClient(opts) using opts for https://www.npmjs.com/package/redis#rediscreateclient
-    // or, call createHandyClient(oldClient) where oldClient is an existing node_redis client.
-
-    await tedis.set('foo', 'bar');
-    // const foo = await client.get('foo');
-    // console.log(foo);
-})();
-
 
 interface Location {
     address: string

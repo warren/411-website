@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "emotion": "^9.2.12",
+    "handy-redis": "^1.5.1",
+    "hiredis": "^0.5.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-emotion": "^9.2.12",
@@ -21,7 +23,7 @@
   },
   "devDependencies": {
     "@types/jest": "^23.3.5",
-    "@types/node": "^10.12.0",
+    "@types/node": "^10.12.2",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "typescript": "^3.1.3"
