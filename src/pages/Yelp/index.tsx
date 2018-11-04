@@ -3,6 +3,9 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
 
+var redis = require('redis');
+var redisClient = redis.createClient();
+
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 interface Location {
@@ -49,6 +52,15 @@ const SearchBox = styled('input')`
     font-size: 20px;
 `;
 
+client.on('connect', function() {
+    console.log('Redis client connected');
+});
+
+client.on('error', function (err) {
+    console.log('Something went wrong ' + err);
+});
+
+
 class Yelp extends React.Component<{}, State> {
     public config = {
         headers: {
@@ -72,6 +84,8 @@ class Yelp extends React.Component<{}, State> {
         axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
             const key = "data";
             const data = response[key];
+            console.log(data);
+            console.log("hi");
             this.setState({restaurant: data.restaurants});
             // console.log(response);
             // console.log(response[key]);
