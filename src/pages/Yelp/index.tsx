@@ -3,10 +3,29 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
 
-var redis = require('redis');
-var redisClient = redis.createClient();
+import { Tedis } from 'tedis';
+
+// var redis = require('redis');
+// var redisClient = redis.createClient();
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
+
+(async () => {
+  const tedis = new Tedis({
+    host: "127.0.0.1",
+    port: 6379
+  });
+
+    // const client = createHandyClient();
+    // or, call createHandyClient(opts) using opts for https://www.npmjs.com/package/redis#rediscreateclient
+    // or, call createHandyClient(oldClient) where oldClient is an existing node_redis client.
+
+    await tedis.set('foo', 'bar');
+    // const foo = await client.get('foo');
+    // console.log(foo);
+})();
+
 
 interface Location {
     address: string
@@ -52,14 +71,6 @@ const SearchBox = styled('input')`
     font-size: 20px;
 `;
 
-client.on('connect', function() {
-    console.log('Redis client connected');
-});
-
-client.on('error', function (err) {
-    console.log('Something went wrong ' + err);
-});
-
 
 class Yelp extends React.Component<{}, State> {
     public config = {
@@ -86,6 +97,9 @@ class Yelp extends React.Component<{}, State> {
             const data = response[key];
             console.log(data);
             console.log("hi");
+            // tedis.set("key", "Hellooo").then(() => {
+            //   tedis.get("key");
+            // });
             this.setState({restaurant: data.restaurants});
             // console.log(response);
             // console.log(response[key]);

@@ -10,7 +10,8 @@
     "react-emotion": "^9.2.12",
     "react-scripts-ts": "3.1.0",
     "redis": "^2.8.0",
-    "redis-parser": "^3.0.0"
+    "redis-parser": "^3.0.0",
+    "tedis": "^0.1.4"
   },
   "scripts": {
     "start": "react-scripts-ts start",
