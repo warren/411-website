@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
@@ -8,15 +8,6 @@ import * as NodeCache from 'node-cache';
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 const myCache = new NodeCache();
-
-const obj = { my: "Special", variable: 42 };
-myCache.set( "myKey", obj, function( err, success ){
-    if( !err && success ){
-        console.log( success );
-        // true
-        // ... do something ...
-    }
-});
 
 interface Location {
     address: string
@@ -80,37 +71,71 @@ class Yelp extends React.Component<{}, State> {
         this.state = { 
             restaurant: [],
         }
-    } 
+    }
+
+    public makeZamatoQuery = () => {
+        axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
+                const key = "data";
+                const data = response[key];
+                console.log(data);
+
+                return data;
+                // this.setState({restaurant: data.restaurants});
+
+                // console.log(response);
+                // console.log(response[key]);
+                // console.log(data.restaurants);
+                // console.log(this.state.restaurant);
+            }
+        )
+    }
 
     public handleClick = () => {
 
-        myCache.get( "myKey", function( err, value ){
-            if( !err ){
-                if(value == undefined){
-                    // key not found
-                }else{
+        // console.log(this.config);
+        // console.log(this.config.params);
+
+        let zamatoCacheKey = String(this.config.params.entity_id) + this.config.params.q;
+
+        myCache.get( zamatoCacheKey, ( err:any, value:any ) => { // Try to get json response from cache
+            if ( !err ) {
+                if (value == undefined) { // If it's not in the cache...
+                    console.log("Cache miss for key " + zamatoCacheKey);
+
+
+                    let zamatoReply = this.makeZamatoQuery();
+                    console.log(zamatoReply);
+
+                    // this.makeZamatoQuery().then((zamatoReply) => {console.log(zamatoReply)});
+
+
+
+                    const obj = { "jsonResponse": zamatoReply }; // Put into cache
+                    console.log(obj);
+                    myCache.set( zamatoCacheKey, obj, function( err, success ){
+                        if( !err && success ){
+                            console.log("Successfully added object to node-cache: " + obj);
+                        }
+                    });
+
+                    myCache.get(zamatoCacheKey)
+
+                    console.log("TODO: Set state here.");
+                    // this.setState({restaurant: zamatoReply.restaurants});
+
+                } else {
+                    console.log("Cache hit for key " + zamatoCacheKey);
                     console.log( value );
-                    //{ my: "Special", variable: 42 }
-                    // ... do something ...
+
+                    console.log("TODO: Set state here.");
+                    // this.setState({restaurant: value.restaurants});
                 }
+            } else {
+                console.log("Error occurred when trying to access cache with key " + zamatoCacheKey + ". Printing error log below:");
+                console.log(err);
             }
         });
 
-        // axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
-        //     const key = "data";
-        //     const data = response[key];
-        //     console.log(data);
-        //     console.log("hi");
-        //     // tedis.set("key", "Hellooo").then(() => {
-        //     //   tedis.get("key");
-        //     // });
-        //     this.setState({restaurant: data.restaurants});
-        //     // console.log(response);
-        //     // console.log(response[key]);
-        //     // console.log(data.restaurants);
-        //     // console.log(this.state.restaurant);
-        //     }
-        // )
     }
 
     public setSearch = (props: any) => {
