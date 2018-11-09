@@ -3,17 +3,7 @@ import axios from 'axios';
 import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
-
-// import { Tedis } from 'tedis';
-// import { createHandyClient } from 'handy-redis';
-
-// var redis = require('redis');
-// var redisClient = redis.createClient();
-
-// const client = redis.createClient();
-// client.on('ready', () => {
-//   console.log('redis is ready.')
-// });
+import Cache from './Tedis';
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -110,6 +100,7 @@ class Yelp extends React.Component<{}, State> {
                 <SearchButton onClick={this.handleClick}> 
                     Search
                 </SearchButton>
+                <Cache />
                 {
                     this.state.restaurant.map((item, key) => 
                         <Section key={key}>

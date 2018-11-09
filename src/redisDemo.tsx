@@ -2,6 +2,8 @@
 
 // THIS WORKS WHEN YOU DO node redisDemo.tsx
 
+
+/*
 var redis = require('redis');
 var client = redis.createClient();
 
@@ -9,12 +11,12 @@ client.on('connect', function() {
     console.log('Redis client connected');
 });
 
-client.on('error', function (err) {
+client.on('error', function (err: any) {
     console.log('Something went wrong ' + err);
 });
 
 client.set('my test key', 'my test value', redis.print);
-client.get('my test key', function (error, result) {
+client.get('my test key', function (error: any, result: any) {
     if (error) {
         console.log(error);
         throw error;
@@ -22,19 +24,11 @@ client.get('my test key', function (error, result) {
     console.log('GET result ->' + result);
 });
 
-// THIS DOES NOT SEEM TO WORK AT ALL
-/*
-import { Tedis } from "tedis";
 
-const tedis = new Tedis({
-  port: 6379,
-  host: "127.0.0.1",
-});
-
-async function f() {
-await tedis.set("mystring", "hello");
-// "OK"
-await tedis.get("mystring");
-}
 */
+
+
+// THIS DOES NOT SEEM TO WORK AT ALL
+
+
 
