@@ -1,11 +1,22 @@
-import axios from 'axios';
-// import * as redis from 'redis';
+// import axios from 'axios';
 import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
-import Cache from './Tedis';
+import * as NodeCache from 'node-cache';
+
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
+const myCache = new NodeCache();
+
+const obj = { my: "Special", variable: 42 };
+myCache.set( "myKey", obj, function( err, success ){
+    if( !err && success ){
+        console.log( success );
+        // true
+        // ... do something ...
+    }
+});
 
 interface Location {
     address: string
@@ -72,21 +83,34 @@ class Yelp extends React.Component<{}, State> {
     } 
 
     public handleClick = () => {
-        axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
-            const key = "data";
-            const data = response[key];
-            console.log(data);
-            console.log("hi");
-            // tedis.set("key", "Hellooo").then(() => {
-            //   tedis.get("key");
-            // });
-            this.setState({restaurant: data.restaurants});
-            // console.log(response);
-            // console.log(response[key]);
-            // console.log(data.restaurants);
-            // console.log(this.state.restaurant);
+
+        myCache.get( "myKey", function( err, value ){
+            if( !err ){
+                if(value == undefined){
+                    // key not found
+                }else{
+                    console.log( value );
+                    //{ my: "Special", variable: 42 }
+                    // ... do something ...
+                }
             }
-        )
+        });
+
+        // axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
+        //     const key = "data";
+        //     const data = response[key];
+        //     console.log(data);
+        //     console.log("hi");
+        //     // tedis.set("key", "Hellooo").then(() => {
+        //     //   tedis.get("key");
+        //     // });
+        //     this.setState({restaurant: data.restaurants});
+        //     // console.log(response);
+        //     // console.log(response[key]);
+        //     // console.log(data.restaurants);
+        //     // console.log(this.state.restaurant);
+        //     }
+        // )
     }
 
     public setSearch = (props: any) => {
@@ -100,7 +124,6 @@ class Yelp extends React.Component<{}, State> {
                 <SearchButton onClick={this.handleClick}> 
                     Search
                 </SearchButton>
-                <Cache />
                 {
                     this.state.restaurant.map((item, key) => 
                         <Section key={key}>
