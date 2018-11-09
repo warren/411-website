@@ -6,16 +6,13 @@
     "@types/node-cache": "^4.1.1",
     "axios": "^0.18.0",
     "emotion": "^9.2.12",
-    "handy-redis": "^1.5.1",
-    "hiredis": "^0.5.0",
     "node-cache": "^4.2.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-emotion": "^9.2.12",
     "react-scripts-ts": "3.1.0",
     "redis": "^2.8.0",
-    "redis-parser": "^3.0.0",
-    "tedis": "^0.1.4"
+    "redis-parser": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
