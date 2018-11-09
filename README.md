@@ -3,6 +3,16 @@ Website about food or classes (but not both)
 
 Team members: Warren Partridge, Ferris Armstrong, Jessie Fu, Joanne Chen
 
+To run this app, first start your redis server with `./redis-server` in your redis install's src directory. Then in this project's root directory, do `npm start`.
+
+As I mentioned we use Redis as our cache. Here's how to set Redis up on your computer:
+1. Visit [Redis's website](https://redis.io/) and download the latest stable version (as of writing this, 5.0.0).
+2. Extract your downloaded file by doing `tar (your redis tar.gz)`.
+3. `cd (your extracted redis)` to go inside
+4. `make` to make the binaries
+5. `src/redis-server` to run your local server. By default, Redis runs on 127.0.0.1:6379.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

@@ -2,8 +2,12 @@ import axios from 'axios';
 import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
+import * as NodeCache from 'node-cache';
+
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
+const myCache = new NodeCache();
 
 interface Location {
     address: string
@@ -49,6 +53,7 @@ const SearchBox = styled('input')`
     font-size: 20px;
 `;
 
+
 class Yelp extends React.Component<{}, State> {
     public config = {
         headers: {
@@ -66,19 +71,45 @@ class Yelp extends React.Component<{}, State> {
         this.state = { 
             restaurant: [],
         }
-    } 
+    }
+
 
     public handleClick = () => {
-        axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
-            const key = "data";
-            const data = response[key];
-            this.setState({restaurant: data.restaurants});
-            // console.log(response);
-            // console.log(response[key]);
-            // console.log(data.restaurants);
-            // console.log(this.state.restaurant);
+        let zamatoCacheKey = String(this.config.params.entity_id) + this.config.params.q; // We will use this key to cache API responses
+
+        myCache.get( zamatoCacheKey, ( err:any, value:any ) => { // Before calling API, first try to get json response from cache
+            if ( !err ) {
+                if (value == undefined) { // If response is not found in the cache...
+                    console.log("Cache miss for key " + zamatoCacheKey + ". Querying Zamato API...");
+
+                    // Do the API call:
+                    axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
+                            const zamatoResponse = response["data"];
+                            console.log("Got response from Zamato:", zamatoResponse, "\nNow attempting to store in cache...");
+
+                            const obj = { "jsonResponse": zamatoResponse }; // Put into cache
+                            myCache.set( zamatoCacheKey, obj, function( err, success ){
+                                if( !err && success ){
+                                    console.log("Successfully stored Zamato response in cache. Rendering restaurants...");
+                                }
+                            });
+
+                            this.setState({restaurant: zamatoResponse.restaurants}); // Render the found response
+                            console.log("Finished rendering restaurants from Zamato query.");
+                        }
+                    )
+
+                } else { // If response is found in cache
+                    console.log("Cache hit for key " + zamatoCacheKey + ". Got response ", value, "\nRendering restaurants...");
+
+                    this.setState({restaurant: value.jsonResponse.restaurants}); // Render the found response
+                    console.log("Finished rendering restaurants from cache.")
+                }
+            } else {
+                console.log("Error occurred when trying to access cache with key " + zamatoCacheKey + ". Error:", err);
             }
-        )
+        });
+
     }
 
     public setSearch = (props: any) => {
