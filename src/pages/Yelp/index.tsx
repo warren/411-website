@@ -103,32 +103,50 @@ class Yelp extends React.Component<{}, State> {
                     console.log("Cache miss for key " + zamatoCacheKey);
 
 
-                    let zamatoReply = this.makeZamatoQuery();
-                    console.log(zamatoReply);
+                    // let zamatoReply = this.makeZamatoQuery();
+                    // console.log(zamatoReply);
+
+
+                    axios.get('https://developers.zomato.com/api/v2.1/search', this.config).then(response => {
+                            // const key = "data";
+                            const zamatoResponse = response["data"];
+                            console.log(zamatoResponse);
+
+
+                            const obj = { "jsonResponse": zamatoResponse }; // Put into cache
+                            console.log(obj);
+                            myCache.set( zamatoCacheKey, obj, function( err, success ){
+                                if( !err && success ){
+                                    console.log("Successfully added object to node-cache: " + obj);
+                                }
+                            });
+
+                            // myCache.get(zamatoCacheKey)
+
+                            // console.log("TODO: Set state here.");
+                            this.setState({restaurant: zamatoResponse.restaurants});
+                            // this.setState({restaurant: data.restaurants});
+
+                            // console.log(response);
+                            // console.log(response[key]);
+                            // console.log(data.restaurants);
+                            // console.log(this.state.restaurant);
+                        }
+                    )
 
                     // this.makeZamatoQuery().then((zamatoReply) => {console.log(zamatoReply)});
 
 
 
-                    const obj = { "jsonResponse": zamatoReply }; // Put into cache
-                    console.log(obj);
-                    myCache.set( zamatoCacheKey, obj, function( err, success ){
-                        if( !err && success ){
-                            console.log("Successfully added object to node-cache: " + obj);
-                        }
-                    });
 
-                    myCache.get(zamatoCacheKey)
-
-                    console.log("TODO: Set state here.");
-                    // this.setState({restaurant: zamatoReply.restaurants});
 
                 } else {
                     console.log("Cache hit for key " + zamatoCacheKey);
-                    console.log( value );
+                    // console.log( value );
+                    // console.log(value.jsonResponse.restaurants);
 
-                    console.log("TODO: Set state here.");
-                    // this.setState({restaurant: value.restaurants});
+                    // console.log("TODO: Set state here.");
+                    this.setState({restaurant: value.jsonResponse.restaurants});
                 }
             } else {
                 console.log("Error occurred when trying to access cache with key " + zamatoCacheKey + ". Printing error log below:");
