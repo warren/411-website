@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import './buttons.css';
 import './App.css';
 import { Yelp } from "./pages";
 
@@ -11,24 +12,76 @@ const FeaturedText = styled('h1')`
 
 const Section = styled('div')`
     text-align: center;
+    margin-bottom: 30%;
 `;
 
-const BlackBackground = styled('div')`
-    background-color: #606060
+const TitleSection = styled('div')`
+    text-align: center;
+    margin-top: 15%;
 `;
+
+// const BlackBackground = styled('div')`
+//     background-image: linear-gradient(315deg, #606060 0%, #303030 74%);}
+//     overflow: hidden;
+//     height: 100%;
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+// `;
+
+const MainHeaderWhite = styled('h1')`
+    color: white;
+    display: inline;
+    font-size: 60px;
+`;
+
+const MainHeaderGreen = styled('h1')`
+    color: green;
+    display: inline;
+    font-size: 60px;
+`;
+
+const MainHeaderBlue = styled('h1')`
+    color: blue;
+    display: inline;
+    font-size: 60px;
+`;
+
+
 
 const App: React.SFC = () => {
     return (
       <>
-        <BlackBackground>
-            <h1>Uber Eats (Out!)</h1>
+        <div className='black-background'>
+            <TitleSection>
+                <MainHeaderWhite>Uber</MainHeaderWhite>
+                <MainHeaderGreen>Eats</MainHeaderGreen>
+                <MainHeaderBlue>(Out!)</MainHeaderBlue>
+            </TitleSection>
 
-            <span>
-                <button>Log in with Google</button>
-                <button>Sign Up</button>
-            </span>
+            <Section>
+                <div className="col-md-3 col-sm-3 col-xs-6"></div>
+                <div className="col-md-3 col-sm-3 col-xs-6">
+                    <a href="#"
+                       className="btn btn-sm animated-button thar-three"
+                       onClick={() => { alert('Google button clicked') }}>
+                       Log in with Google
+                    </a>
+                </div>
+                <div className="col-md-3 col-sm-3 col-xs-6">
+                    <a href="#"
+                       className="btn btn-sm animated-button thar-three"
+                       onClick={() => { alert('Sign up button clicked') }}>
+                       Sign up
+                    </a>
+                </div>
+
+                <div className="col-md-3 col-sm-3 col-xs-6"></div>
+
+            </Section>
+
             <h3>*Uber account required (duh)</h3>
-        </BlackBackground>
+        </div>
 
 
         <FeaturedText>Zomato API</FeaturedText>
