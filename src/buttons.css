@@ -2,12 +2,6 @@
 /*@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);*/
 
 
-body {
-  /*font-family: 'Lato', sans-serif;*/
-  background: #242424; /* We need to set background in here instead of in App.css or else the button breaks, not sure why */
-  color: #FFF;
-}
-
 .jumbotron h1 {
   color: #242424;
 }
