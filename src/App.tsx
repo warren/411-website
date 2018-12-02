@@ -2,15 +2,8 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import { Col } from 'reactstrap';
 import './buttons.css';
-import { Zomato } from "./components";
 import { Welcome } from './pages';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
-const FeaturedText = styled('h1')`
-    text-align: center;
-    color: #FFF;
-    font-size: 50px;
-`;
 
 const Section = styled('div')`
     text-align: center;
@@ -61,11 +54,6 @@ const App: React.SFC = () => {
             </Section>
             <Link to="/pages/welcome/">About</Link>
             <Route path="/pages/welcome/" component={Welcome} />
-
-            <FeaturedText>Zomato API</FeaturedText>
-            <Section>
-            <Zomato />
-            </Section>
         </div>
       </Router>
     );
