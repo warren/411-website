@@ -19,9 +19,10 @@ const Container = styled('div')`
 `;
 
 const Welcome: React.SFC<{}> = () => {
+    console.log(window.history.state.state)
     return (
         <Container>
-            <FeaturedText>Zomato API</FeaturedText>
+            <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
             <Section>
                 <Zomato />
             </Section>

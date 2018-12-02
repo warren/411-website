@@ -43,6 +43,7 @@ interface State {
     isSignedIn: boolean;
     name: string;
     image: string;
+    token: string;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -53,6 +54,7 @@ export default class App extends React.Component<{}, State> {
             image: '',
             isSignedIn: false,
             name: '',
+            token: '',
         };
 
         this.responseSuccess = this.responseSuccess.bind(this);
@@ -66,7 +68,7 @@ export default class App extends React.Component<{}, State> {
             return;
         }
 
-        // const userToken = user.El;
+        const userToken = user.El;
         const nameObj = user.profileObj.givenName;
         const imageObj = user.profileObj.imageUrl;
 
@@ -74,6 +76,7 @@ export default class App extends React.Component<{}, State> {
             image: imageObj,
             isSignedIn: check,
             name: nameObj,
+            token: userToken
         });
     }
 
@@ -108,7 +111,13 @@ export default class App extends React.Component<{}, State> {
                     </Col>
                 </Section>
                 {
-                    this.state.isSignedIn ? <Redirect to="/pages/welcome" /> : null
+                    this.state.isSignedIn ? <Redirect to={{
+                        pathname: "/pages/welcome",
+                        state: { 
+                            name: this.state.name,
+                            token: this.state.token
+                         }
+                      }} /> : null
                 }
             </>
         );
