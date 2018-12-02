@@ -21,6 +21,7 @@ interface RestaurantData {
     name: string;
     location: Location;
     user_rating: UserRating;
+    featured_image : string;
 }
 
 interface Restaurant {
@@ -129,7 +130,8 @@ class Yelp extends React.Component<{}, State> {
                             <Card 
                                 name={item.restaurant.name} 
                                 address={item.restaurant.location.address} 
-                                rating={item.restaurant.user_rating.aggregate_rating}  
+                                rating={item.restaurant.user_rating.aggregate_rating}
+                                imageUrl={item.restaurant.featured_image}  
                             />
                         </Section>
                 )}

@@ -6,10 +6,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
+const place = 'http://localhost:8000/assets/placeholder.jpg';
+
 interface Props {
     name: string;
     address: string;
     rating: string;
+    imageUrl: string;
 }
 
 const Section = styled('section')`
@@ -21,16 +24,48 @@ const Section = styled('section')`
     opacity: 0.5;
 `;
 
-const Card: React.SFC<Props> = (props) =>{
+const CardComponent: React.SFC<Props> = (props) =>{
+    const {
+        name,
+        address,
+        rating,
+        imageUrl
+    } = props
+
     return(
         <>
             <Section>
-                <h1>{props.name}</h1>
-                <h1>{props.address}</h1>
-                <h1>Rating: {props.rating} &#9733;</h1>
+                <h1>{name}</h1>
+                <h1>{address}</h1>
+                <h1>Rating: {rating} &#9733;</h1>
             </Section>
+            <Card>
+                <CardActionArea>
+                    <CardContent>
+                        <Typography component="h5" variant="h5">
+                            Name:
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {name}
+                        </Typography>
+                        <Typography component="h5" variant="h5">
+                            Address:
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {address}
+                        </Typography>
+                        <Typography component="h5" variant="h5">
+                            Rating:
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {rating} &#9733;
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardMedia image={imageUrl ? imageUrl : place} />
+            </Card>
         </>
     );
 };
 
-export default Card;
+export default CardComponent;
