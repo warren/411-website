@@ -5,6 +5,8 @@ import './buttons.css';
 import { Redirect } from 'react-router';
 import { GoogleLogin } from 'react-google-login';
 
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+
 const Section = styled('div')`
     text-align: center;
     margin-bottom: 30%;
@@ -101,7 +103,7 @@ export default class App extends React.Component<{}, State> {
                 <Section>
                     <Col sm="12" md={{ size: 6, offset: 3 }}>
                         <GoogleLogin
-                            clientId=""
+                            clientId={API_KEY}
                             render={renderProps => (
                                 <GoogleSignInButton className="btn btn-sm animated-button thar-three" onClick={renderProps.onClick}>LOG IN</GoogleSignInButton>
                             )}
