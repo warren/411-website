@@ -20,15 +20,6 @@ const TitleSection = styled('div')`
     margin-top: 15%;
 `;
 
-// const BlackBackground = styled('div')`
-//     background-image: linear-gradient(315deg, #606060 0%, #303030 74%);}
-//     overflow: hidden;
-//     height: 100%;
-//     background-position: center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-// `;
-
 const MainHeaderWhite = styled('h1')`
     color: white;
     display: inline;

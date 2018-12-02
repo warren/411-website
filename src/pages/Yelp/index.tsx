@@ -5,7 +5,7 @@ import Card from './Card';
 import * as NodeCache from 'node-cache';
 
 
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const API_KEY = process.env.ZOMATO_API_KEY;
 
 const myCache = new NodeCache();
 
