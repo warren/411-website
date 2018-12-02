@@ -1,8 +1,10 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Row, Col } from 'reactstrap';
 import './buttons.css';
 import './App.css';
-import { Yelp } from "./pages";
+import { Zomato } from "./components";
 
 const FeaturedText = styled('h1')`
     text-align: center;
@@ -77,7 +79,7 @@ const App: React.SFC = () => {
 
         <FeaturedText>Zomato API</FeaturedText>
         <Section>
-          <Yelp />
+          <Zomato />
         </Section>
       </>
     );
