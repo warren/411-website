@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import { Row, Col } from 'reactstrap';
 import './buttons.css';
 import './App.css';
 import { Zomato } from "./components";
@@ -35,46 +35,30 @@ const MainHeaderGreen = styled('h1')`
 `;
 
 const MainHeaderBlue = styled('h1')`
-    color: blue;
+    color: #aaa;
     display: inline;
     font-size: 60px;
 `;
 
-
-
 const App: React.SFC = () => {
     return (
       <>
-        <div className='black-background'>
-            <TitleSection>
-                <MainHeaderWhite>Uber</MainHeaderWhite>
-                <MainHeaderGreen>Eats</MainHeaderGreen>
-                <MainHeaderBlue>(Out!)</MainHeaderBlue>
-            </TitleSection>
+        <TitleSection>
+            <MainHeaderWhite>Uber</MainHeaderWhite>
+            <MainHeaderGreen>Eats</MainHeaderGreen>
+            <MainHeaderBlue>(Out!)</MainHeaderBlue>
+        </TitleSection>
 
-            <Section>
-                <div className="col-md-3 col-sm-3 col-xs-6"></div>
-                <div className="col-md-3 col-sm-3 col-xs-6">
-                    <a href="#"
-                       className="btn btn-sm animated-button thar-three"
-                       onClick={() => { alert('Google button clicked') }}>
-                       Log in with Google
-                    </a>
-                </div>
-                <div className="col-md-3 col-sm-3 col-xs-6">
-                    <a href="#"
-                       className="btn btn-sm animated-button thar-three"
-                       onClick={() => { alert('Sign up button clicked') }}>
-                       Sign up
-                    </a>
-                </div>
-
-                <div className="col-md-3 col-sm-3 col-xs-6"></div>
-
-            </Section>
-
-            <h3>*Uber account required (duh)</h3>
-        </div>
+        <Section>
+            <div className="col-sm-12 col-md-6 offset-md-3">
+                <a href="#"
+                    className="btn btn-sm animated-button thar-three"
+                    onClick={() => { alert('Google button clicked') }}>
+                    Log in with Google
+                </a>
+            </div>
+        </Section>
+        
 
 
         <FeaturedText>Zomato API</FeaturedText>
