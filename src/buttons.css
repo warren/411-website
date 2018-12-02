@@ -87,75 +87,6 @@ a.animated-button:link, a.animated-button:visited {
   transition: all 1s ease;
 }
 
-/* Thar Buttons */
-
-a.animated-button.thar-one {
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  position: relative;
-  border: 2px solid #F7CA18;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-}
-a.animated-button.thar-one:hover {
-  color: #000 !important;
-  background-color: transparent;
-  text-shadow: none;
-}
-a.animated-button.thar-one:hover:before {
-  bottom: 0%;
-  top: auto;
-  height: 100%;
-}
-a.animated-button.thar-one:before {
-  display: block;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  height: 0px;
-  width: 100%;
-  z-index: -1;
-  content: '';
-  color: #000 !important;
-  background: #F7CA18;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-}
-a.animated-button.thar-two {
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  position: relative;
-  border: 2px solid #F7CA18;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-}
-a.animated-button.thar-two:hover {
-  color: #000 !important;
-  background-color: transparent;
-  text-shadow: ntwo;
-}
-a.animated-button.thar-two:hover:before {
-  top: 0%;
-  bottom: auto;
-  height: 100%;
-}
-a.animated-button.thar-two:before {
-  display: block;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  height: 0px;
-  width: 100%;
-  z-index: -1;
-  content: '';
-  color: #000 !important;
-  background: #F7CA18;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-}
-
-
-
-
-
 /* The one we are using */
 
 a.animated-button.thar-three {
@@ -163,7 +94,7 @@ a.animated-button.thar-three {
   cursor: pointer;
   display: block;
   position: relative;
-  border: 2px solid blue;
+  border: 2px solid white;
   transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
 }
 a.animated-button.thar-three:hover {
@@ -186,41 +117,6 @@ a.animated-button.thar-three:before {
   z-index: -1;
   content: '';
   color: #000 !important;
-  background: blue;
-  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
-}
-
-
-
-
-a.animated-button.thar-four {
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  position: relative;
-  border: 2px solid #F7CA18;
-  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
-}
-a.animated-button.thar-four:hover {
-  color: #000 !important;
-  background-color: transparent;
-  text-shadow: nfour;
-}
-a.animated-button.thar-four:hover:before {
-  right: 0%;
-  left: auto;
-  width: 100%;
-}
-a.animated-button.thar-four:before {
-  display: block;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 0px;
-  z-index: -1;
-  content: '';
-  color: #000 !important;
-  background: #F7CA18;
+  background: white;
   transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
 }

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// import { Row, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
 import './buttons.css';
-// import './App.css';
 import { Zomato } from "./components";
+import { Welcome } from './pages';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const FeaturedText = styled('h1')`
     text-align: center;
@@ -42,30 +42,32 @@ const MainHeaderBlue = styled('h1')`
 
 const App: React.SFC = () => {
     return (
-      <>
-        <TitleSection>
-            <MainHeaderWhite>Uber</MainHeaderWhite>
-            <MainHeaderGreen>Eats</MainHeaderGreen>
-            <MainHeaderBlue>(Out!)</MainHeaderBlue>
-        </TitleSection>
+      <Router>
+        <div>
+            <TitleSection>
+                <MainHeaderWhite>Uber</MainHeaderWhite>
+                <MainHeaderGreen>Eats</MainHeaderGreen>
+                <MainHeaderBlue>(Out!)</MainHeaderBlue>
+            </TitleSection>
 
-        <Section>
-            <div className="col-sm-12 col-md-6 offset-md-3">
-                <a href="#"
-                    className="btn btn-sm animated-button thar-three"
-                    onClick={() => { alert('Google button clicked') }}>
-                    Log in with Google
-                </a>
-            </div>
-        </Section>
-        
+            <Section>
+                <Col sm="12" md={{ size: 6, offset: 3 }}>
+                    <a href="#"
+                        className="btn btn-sm animated-button thar-three"
+                        onClick={() => { alert('Google button clicked') }}>
+                        Log in with Google
+                    </a>
+                </Col>
+            </Section>
+            <Link to="/pages/welcome/">About</Link>
+            <Route path="/pages/welcome/" component={Welcome} />
 
-
-        <FeaturedText>Zomato API</FeaturedText>
-        <Section>
-          <Zomato />
-        </Section>
-      </>
+            <FeaturedText>Zomato API</FeaturedText>
+            <Section>
+            <Zomato />
+            </Section>
+        </div>
+      </Router>
     );
 }
 
