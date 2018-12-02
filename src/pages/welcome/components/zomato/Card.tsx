@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-const place = 'http://localhost:8000/assets/placeholder.jpg';
+const place = 'http://localhost:3000/assets/placeholder.jpg';
 
 interface Props {
     name: string;
@@ -15,14 +15,34 @@ interface Props {
     imageUrl: string;
 }
 
-const Section = styled('section')`
-    margin: auto;
-    border: 2px solid white;
-    border-radius: 25px;
-    background: #FFF;
-    width: 50%;
-    opacity: 0.5;
+const Details = styled('div')`
+    display: flex;
+    flex-direction: column;
 `;
+
+const CardItem = styled(Card)`
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+`;
+
+const Content = styled(CardContent)`
+    flex: 1 0 auto;
+    font-size: 15px;
+`;
+
+const Cover = styled(CardMedia)`
+    height: 250px;
+    width: 100%;
+`;
+
+const Title = styled(Typography)`
+    font-size: 3.0rem;
+`
+
+const SubTitle = styled(Typography)`
+    font-size: 2.5rem;
+`
 
 const CardComponent: React.SFC<Props> = (props) =>{
     const {
@@ -34,36 +54,33 @@ const CardComponent: React.SFC<Props> = (props) =>{
 
     return(
         <>
-            <Section>
-                <h1>{name}</h1>
-                <h1>{address}</h1>
-                <h1>Rating: {rating} &#9733;</h1>
-            </Section>
-            <Card>
+            <CardItem>
                 <CardActionArea>
-                    <CardContent>
-                        <Typography component="h5" variant="h5">
+                    <Details>
+                    <Content>
+                        <Title component="h5" variant="h5">
                             Name:
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        </Title>
+                        <SubTitle variant="subtitle1" color="textSecondary">
                             {name}
-                        </Typography>
-                        <Typography component="h5" variant="h5">
+                        </SubTitle>
+                        <Title component="h5" variant="h5">
                             Address:
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        </Title>
+                        <SubTitle variant="subtitle1" color="textSecondary">
                             {address}
-                        </Typography>
-                        <Typography component="h5" variant="h5">
+                        </SubTitle>
+                        <Title component="h5" variant="h5">
                             Rating:
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        </Title>
+                        <SubTitle variant="subtitle1" color="textSecondary">
                             {rating} &#9733;
-                        </Typography>
-                    </CardContent>
+                        </SubTitle>
+                    </Content>
+                    </Details>
                 </CardActionArea>
-                <CardMedia image={imageUrl ? imageUrl : place} />
-            </Card>
+                <Cover image={imageUrl ? imageUrl : place} />
+            </CardItem>
         </>
     );
 };
