@@ -1,5 +1,7 @@
-import Yelp from "./Yelp";
+import Welcome from './welcome';
+import Ride from './ride-request';
 
 export {
-    Yelp,
+    Welcome,
+    Ride
 }
