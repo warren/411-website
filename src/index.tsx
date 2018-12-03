@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Welcome } from './pages'
+import { Welcome, Ride } from './pages'
 
 const Index: React.SFC<{}> = () => {
   return (
@@ -13,6 +13,7 @@ const Index: React.SFC<{}> = () => {
       <div>
         <Route exact path="/" component={App} />
         <Route path="/pages/welcome" component={Welcome} />
+        <Route path="/pages/ride" component={Ride} />
       </div>
     </Router>
   );

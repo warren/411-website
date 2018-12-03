@@ -1,15 +1,20 @@
 import * as React from 'react';
-import Lyft from 'lyft-client';
 
-const lyft = new Lyft(
-    process.env.REACT_APP_LYFT_CLIENT_ID,
-    process.env.REACT_APP_LYFT_CLIENT_SECRET,
-);
+const handleClick = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        console.log(lat,lng);
+    })
+}
 
 const Ride:React.SFC<{}> = () => {
+
     return (
         <>
-
+            <h1>HELLO WORLD</h1>
+            <button onClick={handleClick}>something</button>
         </>
     );
 }
