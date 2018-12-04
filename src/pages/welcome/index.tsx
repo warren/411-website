@@ -5,12 +5,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 
 var config = {
-    apiKey: "AIzaSyB7SgUH7cBnAvzy4GCw6LQl1hfPEGxaRjc",
-    authDomain: "voltaic-mode-193603.firebaseapp.com",
-    databaseURL: "https://voltaic-mode-193603-bf497.firebaseio.com",
-    projectId: "voltaic-mode-193603",
-    storageBucket: "voltaic-mode-193603.appspot.com",
-    messagingSenderId: "356024695903"
 };
 
 const FeaturedText = styled('h1')`
