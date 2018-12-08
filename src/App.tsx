@@ -65,7 +65,7 @@ export default class App extends React.Component<{}, State> {
     public componentDidMount() {
         const user = JSON.parse(String(localStorage.getItem('userInfo')));
         const check = Boolean(user);
-        console.log(user)
+        // console.log(user)
         if (check === false) {
             return;
         }
@@ -84,11 +84,11 @@ export default class App extends React.Component<{}, State> {
 
     public responseSuccess = (response: any) => {
         localStorage.setItem('userInfo', JSON.stringify(response));
-        console.log('you got here')
+        window.location.reload();
     }
 
     public responseFailure = (response: any) => {
-        console.log(response);
+        // console.log(response);
     }
 
     public render() {

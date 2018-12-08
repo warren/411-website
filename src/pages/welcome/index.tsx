@@ -3,8 +3,15 @@ import { Zomato } from './components';
 import styled from 'react-emotion';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
+import { Redirect } from 'react-router';
 
 var config = {
+    apiKey: "AIzaSyB7SgUH7cBnAvzy4GCw6LQl1hfPEGxaRjc",
+    authDomain: "voltaic-mode-193603.firebaseapp.com",
+    databaseURL: "https://voltaic-mode-193603-bf497.firebaseio.com",
+    projectId: "voltaic-mode-193603",
+    storageBucket: "voltaic-mode-193603.appspot.com",
+    messagingSenderId: "356024695903"  
 };
 
 const FeaturedText = styled('h1')`
@@ -27,9 +34,20 @@ const SuggestionText = styled('h3')`
     color: #FFF;
 `;
 
+const LogoutButton = styled('button')`
+    border: 2px solid white;
+    border-radius: 25px;
+    background-color: #00000000;
+    color: #FFF;
+    padding: 10px 30px;
+    font-size: 20px;
+    margin: 15px;
+`;
+
 interface State {
     choice: string;
     errorMsg: string;
+    loggedIn: boolean;
 }
 
 export default class Welcome extends React.Component<{}, State> {
@@ -38,10 +56,12 @@ export default class Welcome extends React.Component<{}, State> {
         super(props);
         this.state = {
             choice: '',
-            errorMsg: null
+            errorMsg: null,
+            loggedIn: true,
         };
-    }
 
+        this.logout = this.logout.bind(this);
+    }
 
     public componentDidMount() {
         firebase.initializeApp(config);
@@ -67,6 +87,13 @@ export default class Welcome extends React.Component<{}, State> {
         })
     }
 
+    public logout () {
+        localStorage.clear();
+        this.setState({
+            loggedIn: false
+        })
+    }
+
     public render() {
         return (
             <Container>
@@ -74,9 +101,15 @@ export default class Welcome extends React.Component<{}, State> {
                 {
                     this.state.errorMsg ? <SuggestionText>{this.state.errorMsg}</SuggestionText> : <SuggestionText>We suggest eating: {this.state.choice}</SuggestionText> 
                 }
+                <LogoutButton onClick={this.logout}>Logout</LogoutButton>
                 <Section>
                     <Zomato search={this.state.choice}/>
                 </Section>
+                {
+                    this.state.loggedIn ? null : <Redirect to={{
+                        pathname: "/",
+                      }} />
+                }
             </Container>
         );
     }
