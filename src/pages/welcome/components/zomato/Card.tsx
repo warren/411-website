@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 const place = 'http://localhost:3000/assets/placeholder.jpg';
 
+const UBER_CLIENT_ID = process.env.REACT_APP_UBER_CLIENT_ID;
+
 interface Props {
     name: string;
     address: string;
@@ -38,11 +40,25 @@ const Cover = styled(CardMedia)`
 
 const Title = styled(Typography)`
     font-size: 3.0rem;
-`
+`;
 
 const SubTitle = styled(Typography)`
     font-size: 2.5rem;
-`
+`;
+
+function URLify(string) {
+    return string.trim().replace(/\s/g, '%20');
+}
+
+function makeUberDeepLink(addressName) {
+
+    let URLifiedAddress = URLify(addressName);
+
+    let deepLink = "https://m.uber.com/ul/?action=setPickup&client_id=" + UBER_CLIENT_ID + "&pickup=my_location&dropoff[formatted_address]=" + URLifiedAddress;
+    console.log(deepLink);
+
+    // TODO: Use twilio to send via text
+}
 
 const CardComponent: React.SFC<Props> = (props) =>{
     const {
@@ -77,6 +93,8 @@ const CardComponent: React.SFC<Props> = (props) =>{
                             {rating} &#9733;
                         </SubTitle>
                     </Content>
+
+                    <button onClick={() => makeUberDeepLink(address)}>Go</button>
                     </Details>
                 </CardActionArea>
                 <Cover image={imageUrl ? imageUrl : place} />
