@@ -8,25 +8,29 @@ const FeaturedText = styled('h1')`
     font-size: 50px;
 `;
 
-const Section = styled('div')`
-    text-align: center;
-    margin-bottom: 30%;
-`;
-
 const Container = styled('div')`
     text-align: center;
     margin: 30px;
 `;
 
+const Navbar = styled('div')`
+    text-align: left;
+    background-color: #aaa;
+    font-size: 40px;
+`;
+
 const Welcome: React.SFC<{}> = () => {
     console.log(window.history.state.state)
     return (
-        <Container>
-            <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
-            <Section>
+        <div>
+            <Navbar>Uber Eats Out
                 <Zomato />
-            </Section>
-        </Container>
+            </Navbar>
+
+            <Container>
+                <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
+            </Container>
+        </div>
     );
 }
 
