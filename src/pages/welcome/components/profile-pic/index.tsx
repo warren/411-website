@@ -1,16 +1,19 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 
+type ProfilePicProps = {
+    proPicURL: string;
+}
 
-const ThePic = styled('span')`
+const ThePic = styled('img')`
     color: #fff;
     float: right;
 `;
 
-class ProfilePic extends React.Component<{}> {
+class ProfilePic extends React.Component<ProfilePicProps> {
     public render() {
         return(
-            <ThePic>(pro pic)</ThePic>
+          <ThePic src={this.props.proPicURL} />
         );
     }
 }

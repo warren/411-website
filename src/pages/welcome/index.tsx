@@ -18,21 +18,33 @@ const Navbar = styled('div')`
     font-size: 40px;
 `;
 
-const Welcome: React.SFC<{}> = () => {
-    console.log(window.history.state.state)
-    return (
-        <div>
-            <Navbar>
-                <span style={{textAlign: 'left'}}>Uber Eats Out</span>
-                <Zomato />
-                <ProfilePic />
-            </Navbar>
-
-            <Container>
-                <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
-            </Container>
-        </div>
-    );
+type WelcomeProps = {
+    history: any,
+    match: any,
+    location: any
 }
+
+
+class Welcome extends React.Component<WelcomeProps> {
+
+    public render() {
+
+        return(
+            <div>
+                <Navbar>
+                    <span style={{textAlign: 'left'}}>Uber Eats Out</span>
+                    <Zomato />
+                    <ProfilePic proPicURL={this.props.location.state.image} />
+                </Navbar>
+
+                <Container>
+                    <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
+                </Container>
+            </div>
+        );
+    }
+}
+
+
 
 export default Welcome;
