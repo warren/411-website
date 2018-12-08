@@ -1,5 +1,7 @@
-import Zomato from './zomato'
+import Zomato from './zomato';
+import ProfilePic from './profile-pic';
 
 export {
-    Zomato
+    Zomato,
+    ProfilePic
 }

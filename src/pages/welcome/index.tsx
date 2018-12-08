@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Zomato } from './components';
+import { Zomato, ProfilePic } from './components';
 import styled from 'react-emotion';
 
 const FeaturedText = styled('h1')`
@@ -14,7 +14,6 @@ const Container = styled('div')`
 `;
 
 const Navbar = styled('div')`
-    text-align: left;
     background-color: #aaa;
     font-size: 40px;
 `;
@@ -23,8 +22,10 @@ const Welcome: React.SFC<{}> = () => {
     console.log(window.history.state.state)
     return (
         <div>
-            <Navbar>Uber Eats Out
+            <Navbar>
+                <span style={{textAlign: 'left'}}>Uber Eats Out</span>
                 <Zomato />
+                <ProfilePic />
             </Navbar>
 
             <Container>
