@@ -5,10 +5,18 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import * as twilio from 'twilio';
 
 const place = 'http://localhost:3000/assets/placeholder.jpg';
 
 const UBER_CLIENT_ID = process.env.REACT_APP_UBER_CLIENT_ID;
+
+const TWILIO_ACCOUNT_SID = process.env.REACT_APP_TWILIO_SID;
+const TWILIO_AUTH_TOKEN = process.env.REACT_APP_TWILIO_AUTH_TOKEN;
+const TWILIO_CLIENT = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+
+
+
 
 interface Props {
     name: string;
@@ -57,7 +65,14 @@ function makeUberDeepLink(addressName) {
     let deepLink = "https://m.uber.com/ul/?action=setPickup&client_id=" + UBER_CLIENT_ID + "&pickup=my_location&dropoff[formatted_address]=" + URLifiedAddress;
     console.log(deepLink);
 
-    // TODO: Use twilio to send via text
+    TWILIO_CLIENT.messages
+        .create({
+            body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+            from: '+16172497227',
+            to: '+17817425803' // TODO do not hardcode
+        })
+        .then(message => console.log(message.sid))
+        .done();
 }
 
 const CardComponent: React.SFC<Props> = (props) =>{
