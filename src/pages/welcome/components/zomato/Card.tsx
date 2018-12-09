@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-import { sendSMS } from './../../../../api/send-sms';
+// import { sendSMS } from './../../../../api/send-sms';
 
 
 const place = 'http://localhost:3000/assets/placeholder.jpg';
@@ -66,7 +66,7 @@ function makeUberDeepLink(addressName) {
     let deepLink = "https://m.uber.com/ul/?action=setPickup&client_id=" + UBER_CLIENT_ID + "&pickup=my_location&dropoff[formatted_address]=" + URLifiedAddress;
     console.log(deepLink);
 
-    sendSMS('+18001234567');
+    // sendSMS('+18001234567');
 }
 
 const CardComponent: React.SFC<Props> = (props) =>{

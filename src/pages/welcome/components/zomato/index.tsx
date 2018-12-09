@@ -29,7 +29,14 @@ interface Restaurant {
 
 interface State {
     restaurant: Restaurant[];
+    lat: Number;
+    long: Number;
 }
+
+// interface Props {
+//     latitude: Number;
+//     longitude: Number;
+// }
 
 const Section = styled('div')`
     margin: 50px;
@@ -61,21 +68,43 @@ class Yelp extends React.Component<{}, State> {
         },
         params: {
           count: 50, // limit to 50 objects
-          entity_id: 289, // Boston
-          q: 'chinese', // search keyword
+          // lat: moved to this.state.lat (we must get on component load)
+          // long: moved to this.state.long (we must get on component load)
+          q: 'chinese' // search keyword
         }
     };
 
     constructor(props: any) {
         super(props);
-        this.state = { 
+        this.state = {
             restaurant: [],
+            lat: -999,
+            long: -999
+        }
+    }
+
+    public componentDidMount() {
+        this.setLatLongInState();
+    }
+
+    public setLatLongInState() {
+        const location = window.navigator && window.navigator.geolocation;
+
+        if (location) {
+            location.getCurrentPosition((position) => {
+                this.setState({
+                    lat: position.coords.latitude,
+                    long: position.coords.longitude,
+                });
+            }, (error) => {
+                this.setState({ lat: 999, long: 999 });
+            })
         }
     }
 
 
     public handleClick = () => {
-        let zamatoCacheKey = String(this.config.params.entity_id) + this.config.params.q; // We will use this key to cache API responses
+        let zamatoCacheKey = String(this.state.lat) + String(this.state.long) + this.config.params.q; // We will use this key to cache API responses
 
         myCache.get( zamatoCacheKey, ( err:any, value:any ) => { // Before calling API, first try to get json response from cache
             if ( !err ) {
