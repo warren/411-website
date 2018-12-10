@@ -26,6 +26,10 @@ h2 {
   margin-top: 60px;
 }
 /* Global Button Styles */
+
+a.btn-sm.animated-button.thar-three.css-1b09kg{
+  color:white;
+}
 a.animated-button:link, a.animated-button:visited {
   position: relative;
   display: block;

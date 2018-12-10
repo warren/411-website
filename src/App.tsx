@@ -24,19 +24,19 @@ const MainHeaderWhite = styled('h1')`
 `;
 
 const MainHeaderGreen = styled('h1')`
-    color: green;
+    color: white;
     display: inline;
     font-size: 60px;
 `;
 
 const MainHeaderBlue = styled('h1')`
-    color: #aaa;
+    color: white;
     display: inline;
     font-size: 60px;
 `;
 
 const GoogleSignInButton = styled('a')`
-    font-size: 14px;
+    font-size: 16px;
     padding: 10px;
     margin: 30px 0px;
 `;
@@ -97,7 +97,7 @@ export default class App extends React.Component<{}, State> {
                 <TitleSection>
                     <MainHeaderWhite>Uber</MainHeaderWhite>
                     <MainHeaderGreen>Eats</MainHeaderGreen>
-                    <MainHeaderBlue>(Out!)</MainHeaderBlue>
+                    <MainHeaderBlue>Out</MainHeaderBlue>
                 </TitleSection>
 
                 <Section>

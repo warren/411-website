@@ -6,7 +6,6 @@ import 'firebase/database';
 import { Redirect } from 'react-router';
 
 var config = {
-   // Make sure you have this
 };
 
 const FeaturedText = styled('h1')`
@@ -20,18 +19,8 @@ const Container = styled('div')`
     margin: 30px;
 `;
 
-// const Navbar = styled('div')`
-//     background-color: #aaa;
-//     font-size: 40px;
-// `;
-//
-type WelcomeProps = {
-    history: any,
-    match: any,
-    location: any
-}
-
 const SuggestionText = styled('h3')`
+    text-align:center;
     color: #FFF;
 `;
 
@@ -45,13 +34,41 @@ const LogoutButton = styled('button')`
     margin: 15px;
 `;
 
+const Navbar = styled('div')`
+    font-size: 40px;
+    height: 106px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: white;
+    border-width: 5px;
+    color: white;
+`;
+
+const Section = styled('div')`
+    text-align: center;
+    margin-bottom: 30%;
+`;
+
+const Title = styled('span')`
+    text-align: left;
+    margin-left: 15px;
+    display: inline-block;
+    margin-top: 30px;
+`;
+
+const Wrapper = styled('div')`
+    max-width: 150rem;
+    margin: 3rem auto 0;
+    font-family: sans-serif;
+`;
+
 interface State {
     choice: string;
     errorMsg: string;
     loggedIn: boolean;
 }
 
-export default class Welcome extends React.Component<WelcomeProps, State> {
+export default class Welcome extends React.Component<{}, State> {
 
     constructor(props: any) {
         super(props);
@@ -97,22 +114,29 @@ export default class Welcome extends React.Component<WelcomeProps, State> {
 
     public render() {
         return (
-            <Container>
-                <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
-                {
-                    this.state.errorMsg ? <SuggestionText>{this.state.errorMsg}</SuggestionText> : <SuggestionText>We suggest eating: {this.state.choice}</SuggestionText> 
-                }
-                <ProfilePic proPicURL={window.history.state.state.image} />
-                <LogoutButton onClick={this.logout}>Logout</LogoutButton>
-                {/*<Section>*/}
-                    <Zomato search={this.state.choice}/>
-                {/*</Section>*/}
-                {
-                    this.state.loggedIn ? null : <Redirect to={{
-                        pathname: "/",
-                      }} />
-                }
-            </Container>
+            <Wrapper>
+                <Navbar>
+                        <ProfilePic proPicURL={window.history.state.state.image} />
+                        <Title>Uber Eats Out</Title>
+                        {/*<Zomato latitude={42.350560} longitude={-71.100470}/> /!*TODO: Get lat long dynamically*!/*/}
+                        
+                </Navbar>
+                <Container>
+                    <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
+                    {
+                        this.state.errorMsg ? <SuggestionText>{this.state.errorMsg}</SuggestionText> : <SuggestionText>We suggest eating: {this.state.choice}</SuggestionText> 
+                    }
+                    <LogoutButton onClick={this.logout}>Logout</LogoutButton>
+                    <Section>
+                        <Zomato search={this.state.choice}/>
+                    </Section>
+                    {
+                        this.state.loggedIn ? null : <Redirect to={{
+                            pathname: "/",
+                        }} />
+                    }
+                </Container>
+            </Wrapper>
         );
     }
 }

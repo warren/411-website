@@ -80,8 +80,6 @@ class Zomato extends React.Component<Props, State> {
         },
         params: {
           count: 50, // limit to 50 objects
-          // lat: moved to this.state.lat (we must get on component load)
-          // long: moved to this.state.long (we must get on component load)
           entity_id: 289, // Boston
           q: `${this.props.search}`, // search keyword
         }
