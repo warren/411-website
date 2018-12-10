@@ -192,7 +192,7 @@ class Zomato extends React.Component<Props, State> {
       
         return <>
 
-        <div style={{display: 'flex'}}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
             <TextField
                 id="search-field"
                 label="Restaurant Search"
@@ -201,7 +201,7 @@ class Zomato extends React.Component<Props, State> {
                 onChange={this.setSearch}
                 margin="normal"
                 variant="filled"
-                style={{display: 'inline-block'}}
+                style={{display: 'inline-block',height: '10px', margin: '0 10px'}}
             />
 
             {/*<SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>*/}
