@@ -3,10 +3,18 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
 import * as NodeCache from 'node-cache';
+import Select from 'react-select';
+// import MenuItem from "@material-ui/core/es/MenuItem";
 
 const API_KEY = process.env.REACT_APP_ZOMATO_API_KEY;
 
 const myCache = new NodeCache();
+
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+];
 
 interface Location {
     address: string
@@ -31,6 +39,7 @@ interface State {
     restaurant: Restaurant[];
     lat: Number;
     long: Number;
+    selectedOption: string;
 }
 
 // interface Props {
@@ -70,7 +79,7 @@ class Yelp extends React.Component<{}, State> {
           count: 50, // limit to 50 objects
           // lat: moved to this.state.lat (we must get on component load)
           // long: moved to this.state.long (we must get on component load)
-          q: 'chinese' // search keyword
+          q: 'chinese', // search keyword
         }
     };
 
@@ -79,7 +88,8 @@ class Yelp extends React.Component<{}, State> {
         this.state = {
             restaurant: [],
             lat: -999,
-            long: -999
+            long: -999,
+            selectedOption: null
         }
     }
 
@@ -102,9 +112,16 @@ class Yelp extends React.Component<{}, State> {
         }
     }
 
+    public handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`Option selected:`, selectedOption);
+    }
 
     public handleClick = () => {
         let zamatoCacheKey = String(this.state.lat) + String(this.state.long) + this.config.params.q; // We will use this key to cache API responses
+
+
+        // TODO: Decide here what the radius will be based on a button
 
         myCache.get( zamatoCacheKey, ( err:any, value:any ) => { // Before calling API, first try to get json response from cache
             if ( !err ) {
@@ -146,25 +163,32 @@ class Yelp extends React.Component<{}, State> {
     }
 
     public render() {
-        return (
-            <>
-                <SearchBox type="text" onChange={this.setSearch} />
-                <SearchButton onClick={this.handleClick}> 
-                    Search
-                </SearchButton>
-                {
-                    this.state.restaurant.map((item, key) => 
-                        <Section key={key}>
-                            <Card 
-                                name={item.restaurant.name} 
-                                address={item.restaurant.location.address} 
-                                rating={item.restaurant.user_rating.aggregate_rating}
-                                imageUrl={item.restaurant.featured_image}  
-                            />
-                        </Section>
-                )}
-            </>
-        );
+        const { selectedOption } = this.state;
+
+        return <>
+        <SearchBox type="text" onChange={this.setSearch}/>
+
+        <Select
+            value={selectedOption}
+            onChange={this.handleChange}
+            options={options}
+        />
+
+        <SearchButton onClick={this.handleClick}>
+            Search
+        </SearchButton>
+        {
+            this.state.restaurant.map((item, key) =>
+                <Section key={key}>
+                    <Card
+                        name={item.restaurant.name}
+                        address={item.restaurant.location.address}
+                        rating={item.restaurant.user_rating.aggregate_rating}
+                        imageUrl={item.restaurant.featured_image}
+                    />
+                </Section>
+            )}
+        </>;
     }
 }
 
