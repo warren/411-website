@@ -5,25 +5,22 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
-// import { sendSMS } from './../../../../api/send-sms';
-
+import { Redirect } from 'react-router';
 
 const place = 'http://localhost:3000/assets/placeholder.jpg';
 
 const UBER_CLIENT_ID = process.env.REACT_APP_UBER_CLIENT_ID;
-
-// const TWILIO_ACCOUNT_SID = process.env.REACT_APP_TWILIO_SID;
-// const TWILIO_AUTH_TOKEN = process.env.REACT_APP_TWILIO_AUTH_TOKEN;
-// const TWILIO_CLIENT = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-
-
 
 interface Props {
     name: string;
     address: string;
     rating: string;
     imageUrl: string;
+}
+
+interface State {
+    selected: boolean;
+    deepLink: string;
 }
 
 const Details = styled('div')`
@@ -58,62 +55,79 @@ const SubTitle = styled(Typography)`
     font-size: 2.5rem;
 `;
 
-function URLify(string) {
-    return string.trim().replace(/\s/g, '%20');
-}
+class CardComponent extends React.Component<Props, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            selected: false,
+            deepLink: ''
+        }
+        this.makeUberDeepLink = this.makeUberDeepLink.bind(this);
+    }
 
-function makeUberDeepLink(addressName) {
+    public URLify(string) {
+        return string.trim().replace(/\s/g, '%20');
+    }
+    
+    public makeUberDeepLink(addressName) {
+    
+        let URLifiedAddress = this.URLify(addressName);
+    
+        let deepLink = "https://m.uber.com/ul/?action=setPickup&client_id=" + UBER_CLIENT_ID + "&pickup=my_location&dropoff[formatted_address]=" + URLifiedAddress;
+        console.log(deepLink);
+        this.setState({
+            selected: true,
+            deepLink: deepLink
+        })
+    }
 
-    let URLifiedAddress = URLify(addressName);
-
-    let deepLink = "https://m.uber.com/ul/?action=setPickup&client_id=" + UBER_CLIENT_ID + "&pickup=my_location&dropoff[formatted_address]=" + URLifiedAddress;
-    console.log(deepLink);
-
-    // sendSMS('+18001234567');
-}
-
-const CardComponent: React.SFC<Props> = (props) =>{
-    const {
-        name,
-        address,
-        rating,
-        imageUrl
-    } = props
-
-    return(
-        <>
-            <CardItem>
-
-                <CardActionArea>
-                    <Details>
-                    <Content>
-                        <Title component="h5" variant="h5">
-                            Name:
-                        </Title>
-                        <SubTitle variant="subtitle1" color="textSecondary">
-                            {name}
-                        </SubTitle>
-                        <Title component="h5" variant="h5">
-                            Address:
-                        </Title>
-                        <SubTitle variant="subtitle1" color="textSecondary">
-                            {address}
-                        </SubTitle>
-                        <Title component="h5" variant="h5">
-                            Rating:
-                        </Title>
-                        <SubTitle variant="subtitle1" color="textSecondary">
-                            {rating} &#9733;
-                        </SubTitle>
-                    </Content>
-
-                    <button onClick={() => makeUberDeepLink(address)}>Go</button>
-                    </Details>
-                </CardActionArea>
-                <Cover image={imageUrl ? imageUrl : place} />
-            </CardItem>
-        </>
-    );
+    public render () {
+        const {
+            name,
+            address,
+            rating,
+            imageUrl
+        } = this.props
+        return(
+            <>
+                <CardItem>
+                    <CardActionArea onClick={() => this.makeUberDeepLink(address)}>
+                        <Details>
+                        <Content>
+                            <Title component="h5" variant="h5">
+                                Name:
+                            </Title>
+                            <SubTitle variant="subtitle1" color="textSecondary">
+                                {name}
+                            </SubTitle>
+                            <Title component="h5" variant="h5">
+                                Address:
+                            </Title>
+                            <SubTitle variant="subtitle1" color="textSecondary">
+                                {address}
+                            </SubTitle>
+                            <Title component="h5" variant="h5">
+                                Rating:
+                            </Title>
+                            <SubTitle variant="subtitle1" color="textSecondary">
+                                {rating} &#9733;
+                            </SubTitle>
+                        </Content>
+                        </Details>
+                    </CardActionArea>
+                    <Cover image={imageUrl ? imageUrl : place} />
+                </CardItem>
+                {
+                    this.state.selected ? <Redirect to={{
+                        pathname: "ride",
+                        state: {
+                            deepLink: this.state.deepLink,
+                        }
+                    }} /> : null
+                }
+            </>
+        );
+    }
 };
 
 export default CardComponent;

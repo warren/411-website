@@ -6,6 +6,7 @@ import 'firebase/database';
 import { Redirect } from 'react-router';
 
 var config = {
+ 
 };
 
 const FeaturedText = styled('h1')`
