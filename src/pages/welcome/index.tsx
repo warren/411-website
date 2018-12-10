@@ -6,7 +6,7 @@ import 'firebase/database';
 import { Redirect } from 'react-router';
 
 var config = {
-  
+   // Make sure you have this
 };
 
 const FeaturedText = styled('h1')`
@@ -20,11 +20,11 @@ const Container = styled('div')`
     margin: 30px;
 `;
 
-const Navbar = styled('div')`
-    background-color: #aaa;
-    font-size: 40px;
-`;
-
+// const Navbar = styled('div')`
+//     background-color: #aaa;
+//     font-size: 40px;
+// `;
+//
 type WelcomeProps = {
     history: any,
     match: any,
@@ -51,7 +51,7 @@ interface State {
     loggedIn: boolean;
 }
 
-export default class Welcome extends React.Component<{}, State> {
+export default class Welcome extends React.Component<WelcomeProps, State> {
 
     constructor(props: any) {
         super(props);
@@ -102,11 +102,11 @@ export default class Welcome extends React.Component<{}, State> {
                 {
                     this.state.errorMsg ? <SuggestionText>{this.state.errorMsg}</SuggestionText> : <SuggestionText>We suggest eating: {this.state.choice}</SuggestionText> 
                 }
-                <ProfilePic proPicURL={this.props.location.state.image} />
+                <ProfilePic proPicURL={window.history.state.state.image} />
                 <LogoutButton onClick={this.logout}>Logout</LogoutButton>
-                <Section>
+                {/*<Section>*/}
                     <Zomato search={this.state.choice}/>
-                </Section>
+                {/*</Section>*/}
                 {
                     this.state.loggedIn ? null : <Redirect to={{
                         pathname: "/",
