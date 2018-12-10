@@ -37,7 +37,6 @@ const CardItem = styled(Card)`
     margin-bottom: 30px;
     width: 90%;
     margin: auto;
-
 `;
 
 const Content = styled(CardContent)`
@@ -51,11 +50,11 @@ const Cover = styled(CardMedia)`
 `;
 
 const Title = styled(Typography)`
-    font-size: 3.0rem;
+    font-size: 20px;
 `;
 
 const SubTitle = styled(Typography)`
-    font-size: 2.5rem;
+    font-size: 15px;
 `;
 
 function URLify(string) {

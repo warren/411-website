@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import TextField from "@material-ui/core/TextField";
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
+import withStyles from "@material-ui/core/styles/withStyles";
 // import Input from "@material-ui/core/Input";
 // import InputLabel from "@material-ui/core/InputLabel";
 
@@ -54,6 +55,26 @@ interface State {
 const Section = styled('div')`
     margin: 50px;
 `;
+
+const StyledButton = withStyles({
+    root: {
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        fontSize: '20px'
+    }
+})(Button);
+
+const StyledSelect = withStyles({
+    root: {
+        fontSize: '20px',
+    }
+})(Select);
+
 
 // const SearchButton = styled('button')`
 //     border: 2px solid white;
@@ -196,9 +217,9 @@ class Zomato extends React.Component<Props, State> {
                 // className={classes.textField}
                 // value={this.state.name}
                 onChange={this.setSearch}
-                margin="normal"
+                // margin="normal"
                 variant="filled"
-                style={{display: 'inline-block', height: '10px', margin: '0 10px'}}
+                style={{display: 'inline-block', height: '10px', margin: '0 10px', fontSize: '20px'}}
             />
 
             {/*<SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>*/}
@@ -211,7 +232,7 @@ class Zomato extends React.Component<Props, State> {
             {/*/>*/}
 
             {/*<InputLabel htmlFor="restaurant-search">Age</InputLabel>*/}
-            <Select
+            <StyledSelect
                 value={this.state.selectedOption}
                 onChange={this.handleChange}
                 // inputProps={{
@@ -235,16 +256,16 @@ class Zomato extends React.Component<Props, State> {
                 <MenuItem value={16093.44}>10 miles (~20 min drive)</MenuItem>
                 <MenuItem value={24140.16}>15 miles (~30 min drive)</MenuItem>
                 <MenuItem value={32186.88}>20 miles (~40 min drive)</MenuItem>
-            </Select>
+            </StyledSelect>
 
 
-            <Button onClick={this.handleClick}
+            <StyledButton onClick={this.handleClick}
                     variant="contained"
                     color="default"
                     style={{display: 'inline-block'}}
             >
                 Search
-            </Button>
+            </StyledButton>
         </div>
         {
             this.state.restaurant.map((item, key) =>

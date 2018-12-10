@@ -16,7 +16,7 @@ var config = { // TODO: Make this imported from a separate file
 
 const FeaturedText = styled('h1')`
     text-align: center;
-    color: #FFF;
+    color: #555;
     font-size: 50px;
 `;
 
@@ -27,14 +27,14 @@ const Container = styled('div')`
 
 const SuggestionText = styled('h3')`
     text-align:center;
-    color: #FFF;
+    color: #555;
 `;
 
 const LogoutButton = styled('button')`
     border: 2px solid white;
     border-radius: 25px;
     background-color: #00000000;
-    color: #FFF;
+    color: #555;
     padding: 10px 30px;
     font-size: 20px;
     margin: 15px;
@@ -47,7 +47,7 @@ const Navbar = styled('div')`
     border-style: solid;
     border-color: white;
     border-width: 5px;
-    color: white;
+    color: #555;
 `;
 
 const Section = styled('div')`
