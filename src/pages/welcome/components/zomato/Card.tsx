@@ -42,6 +42,7 @@ const CardItem = styled(Card)`
 const Content = styled(CardContent)`
     flex: 1 0 auto;
     font-size: 15px;
+    margin-bottom: 0;
 `;
 
 const Cover = styled(CardMedia)`
@@ -50,11 +51,13 @@ const Cover = styled(CardMedia)`
 `;
 
 const Title = styled(Typography)`
-    font-size: 20px;
+    text-align: left;
+    font-size: 30px;
 `;
 
 const SubTitle = styled(Typography)`
-    font-size: 15px;
+    text-align: left;
+    font-size: 20px;
 `;
 
 function URLify(string) {
@@ -85,28 +88,20 @@ const CardComponent: React.SFC<Props> = (props) =>{
 
                 <CardActionArea>
                     <Details>
-                    <Content>
+                    <Content onClick={() => makeUberDeepLink(address)}>
                         <Title component="h5" variant="h5">
-                            Name:
-                        </Title>
-                        <SubTitle variant="subtitle1" color="textSecondary">
                             {name}
-                        </SubTitle>
-                        <Title component="h5" variant="h5">
-                            Address:
                         </Title>
                         <SubTitle variant="subtitle1" color="textSecondary">
                             {address}
                         </SubTitle>
-                        <Title component="h5" variant="h5">
-                            Rating:
-                        </Title>
-                        <SubTitle variant="subtitle1" color="textSecondary">
-                            {rating} &#9733;
-                        </SubTitle>
-                    </Content>
 
-                    <button onClick={() => makeUberDeepLink(address)}>Go</button>
+                        <div style={{display: 'flex', marginTop: '50px'}}>
+                            <SubTitle style={{display: 'inline-block'}} variant="subtitle1" color="textSecondary">
+                                {rating} &#9733;
+                            </SubTitle>
+                        </div>
+                    </Content>
                     </Details>
                 </CardActionArea>
                 <Cover image={imageUrl ? imageUrl : place} />

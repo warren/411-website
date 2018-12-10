@@ -28,16 +28,18 @@ const Container = styled('div')`
 const SuggestionText = styled('h3')`
     text-align:center;
     color: #555;
+    font-size: 15px;
 `;
 
 const LogoutButton = styled('button')`
     border: 2px solid white;
     border-radius: 25px;
-    background-color: #00000000;
+    background-color: #eee;
     color: #555;
     padding: 10px 30px;
-    font-size: 20px;
+    font-size: 12px;
     margin: 15px;
+    margin-top: 25px;
 `;
 
 const Navbar = styled('div')`
@@ -47,7 +49,7 @@ const Navbar = styled('div')`
     border-style: solid;
     border-color: white;
     border-width: 5px;
-    color: #555;
+    background-color: #222;
 `;
 
 const Section = styled('div')`
@@ -59,12 +61,12 @@ const Title = styled('span')`
     text-align: left;
     margin-left: 15px;
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 19px;
+    color: #eee;
 `;
 
 const Wrapper = styled('div')`
     max-width: 150rem;
-    margin: 3rem auto 0;
     font-family: sans-serif;
 `;
 
@@ -123,8 +125,7 @@ export default class Welcome extends React.Component<{}, State> {
             <Wrapper>
                 <Navbar>
                         <ProfilePic proPicURL={window.history.state.state.image} />
-                        <Title>Uber Eats Out</Title>
-                        {/*<Zomato latitude={42.350560} longitude={-71.100470}/> /!*TODO: Get lat long dynamically*!/*/}
+                        <Title>Uber Eats (Out)</Title>
                         <LogoutButton onClick={this.logout} style={{float: 'right'}}>Logout</LogoutButton>
                 </Navbar>
                 <Container>
