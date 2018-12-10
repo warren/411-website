@@ -115,9 +115,10 @@ export default class App extends React.Component<{}, State> {
                 {
                     this.state.isSignedIn ? <Redirect to={{
                         pathname: "/pages/welcome",
-                        state: { 
+                        state: {
                             name: this.state.name,
-                            token: this.state.token
+                            token: this.state.token,
+                            image: this.state.image
                          }
                       }} /> : null
                 }

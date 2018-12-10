@@ -6,7 +6,18 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
+// import { sendSMS } from './../../../../api/send-sms';
+
+
 const place = 'http://localhost:3000/assets/placeholder.jpg';
+
+const UBER_CLIENT_ID = process.env.REACT_APP_UBER_CLIENT_ID;
+
+// const TWILIO_ACCOUNT_SID = process.env.REACT_APP_TWILIO_SID;
+// const TWILIO_AUTH_TOKEN = process.env.REACT_APP_TWILIO_AUTH_TOKEN;
+// const TWILIO_CLIENT = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+
+
 
 interface Props {
     name: string;
@@ -38,11 +49,25 @@ const Cover = styled(CardMedia)`
 
 const Title = styled(Typography)`
     font-size: 3.0rem;
-`
+`;
 
 const SubTitle = styled(Typography)`
     font-size: 2.5rem;
-`
+`;
+
+function URLify(string) {
+    return string.trim().replace(/\s/g, '%20');
+}
+
+function makeUberDeepLink(addressName) {
+
+    let URLifiedAddress = URLify(addressName);
+
+    let deepLink = "https://m.uber.com/ul/?action=setPickup&client_id=" + UBER_CLIENT_ID + "&pickup=my_location&dropoff[formatted_address]=" + URLifiedAddress;
+    console.log(deepLink);
+
+    // sendSMS('+18001234567');
+}
 
 const CardComponent: React.SFC<Props> = (props) =>{
     const {
@@ -77,6 +102,8 @@ const CardComponent: React.SFC<Props> = (props) =>{
                             {rating} &#9733;
                         </SubTitle>
                     </Content>
+
+                    <button onClick={() => makeUberDeepLink(address)}>Go</button>
                     </Details>
                 </CardActionArea>
                 <Cover image={imageUrl ? imageUrl : place} />

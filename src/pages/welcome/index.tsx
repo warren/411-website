@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Zomato } from './components';
+import { Zomato, ProfilePic } from './components';
 import styled from 'react-emotion';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
@@ -15,15 +15,21 @@ const FeaturedText = styled('h1')`
     font-size: 50px;
 `;
 
-const Section = styled('div')`
-    text-align: center;
-    margin-bottom: 30%;
-`;
-
 const Container = styled('div')`
     text-align: center;
     margin: 30px;
 `;
+
+const Navbar = styled('div')`
+    background-color: #aaa;
+    font-size: 40px;
+`;
+
+type WelcomeProps = {
+    history: any,
+    match: any,
+    location: any
+}
 
 const SuggestionText = styled('h3')`
     color: #FFF;
@@ -96,6 +102,7 @@ export default class Welcome extends React.Component<{}, State> {
                 {
                     this.state.errorMsg ? <SuggestionText>{this.state.errorMsg}</SuggestionText> : <SuggestionText>We suggest eating: {this.state.choice}</SuggestionText> 
                 }
+                <ProfilePic proPicURL={this.props.location.state.image} />
                 <LogoutButton onClick={this.logout}>Logout</LogoutButton>
                 <Section>
                     <Zomato search={this.state.choice}/>
