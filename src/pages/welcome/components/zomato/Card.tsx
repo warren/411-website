@@ -34,12 +34,12 @@ const CardItem = styled(Card)`
     margin-bottom: 30px;
     width: 90%;
     margin: auto;
-
 `;
 
 const Content = styled(CardContent)`
     flex: 1 0 auto;
     font-size: 15px;
+    margin-bottom: 0;
 `;
 
 const Cover = styled(CardMedia)`
@@ -48,12 +48,15 @@ const Cover = styled(CardMedia)`
 `;
 
 const Title = styled(Typography)`
-    font-size: 3.0rem;
+    text-align: left;
+    font-size: 30px;
 `;
 
 const SubTitle = styled(Typography)`
-    font-size: 2.5rem;
+    text-align: left;
+    font-size: 20px;
 `;
+
 
 class CardComponent extends React.Component<Props, State> {
     constructor(props: any) {
@@ -95,23 +98,17 @@ class CardComponent extends React.Component<Props, State> {
                         <Details>
                         <Content>
                             <Title component="h5" variant="h5">
-                                Name:
+                            {name}
                             </Title>
-                            <SubTitle variant="subtitle1" color="textSecondary">
-                                {name}
-                            </SubTitle>
-                            <Title component="h5" variant="h5">
-                                Address:
-                            </Title>
-                            <SubTitle variant="subtitle1" color="textSecondary">
-                                {address}
-                            </SubTitle>
-                            <Title component="h5" variant="h5">
-                                Rating:
-                            </Title>
-                            <SubTitle variant="subtitle1" color="textSecondary">
+                        <SubTitle variant="subtitle1" color="textSecondary">
+                            {address}
+                        </SubTitle>
+
+                        <div style={{display: 'flex', marginTop: '50px'}}>
+                            <SubTitle style={{display: 'inline-block'}} variant="subtitle1" color="textSecondary">
                                 {rating} &#9733;
                             </SubTitle>
+                        </div>
                         </Content>
                         </Details>
                     </CardActionArea>
