@@ -8,6 +8,7 @@ type ProfilePicProps = {
 const ThePic = styled('img')`
     color: #fff;
     float: right;
+    border-radius: 5px;
 `;
 
 class ProfilePic extends React.Component<ProfilePicProps> {

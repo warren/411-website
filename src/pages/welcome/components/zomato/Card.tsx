@@ -35,6 +35,9 @@ const CardItem = styled(Card)`
     display: flex;
     margin-top: 30px;
     margin-bottom: 30px;
+    width: 70%;
+    margin: auto;
+
 `;
 
 const Content = styled(CardContent)`
@@ -80,6 +83,7 @@ const CardComponent: React.SFC<Props> = (props) =>{
     return(
         <>
             <CardItem>
+
                 <CardActionArea>
                     <Details>
                     <Content>

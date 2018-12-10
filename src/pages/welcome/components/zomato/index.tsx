@@ -60,17 +60,19 @@ const SearchBox = styled('input')`
     font-size: 20px;
 `;
 
+interface Props {
+    search: string;
+}
 
-class Yelp extends React.Component<{}, State> {
+class Zomato extends React.Component<Props, State> {
     public config = {
         headers: {
           'user-key': API_KEY,
         },
         params: {
           count: 50, // limit to 50 objects
-          // lat: moved to this.state.lat (we must get on component load)
-          // long: moved to this.state.long (we must get on component load)
-          q: 'chinese' // search keyword
+          entity_id: 289, // Boston
+          q: `${this.props.search}`, // search keyword
         }
     };
 
@@ -101,7 +103,6 @@ class Yelp extends React.Component<{}, State> {
             })
         }
     }
-
 
     public handleClick = () => {
         let zamatoCacheKey = String(this.state.lat) + String(this.state.long) + this.config.params.q; // We will use this key to cache API responses
@@ -146,9 +147,10 @@ class Yelp extends React.Component<{}, State> {
     }
 
     public render() {
+        this.config.params.q = this.props.search;
         return (
             <>
-                <SearchBox type="text" onChange={this.setSearch} />
+                <SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>
                 <SearchButton onClick={this.handleClick}> 
                     Search
                 </SearchButton>
@@ -168,4 +170,4 @@ class Yelp extends React.Component<{}, State> {
     }
 }
 
-export default Yelp;
+export default Zomato;
