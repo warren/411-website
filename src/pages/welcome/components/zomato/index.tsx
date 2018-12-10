@@ -4,6 +4,10 @@ import styled from 'react-emotion';
 import Card from './Card';
 import * as NodeCache from 'node-cache';
 import Select from 'react-select';
+
+import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+
 // import MenuItem from "@material-ui/core/es/MenuItem";
 
 const API_KEY = process.env.REACT_APP_ZOMATO_API_KEY;
@@ -55,23 +59,23 @@ const Section = styled('div')`
     margin: 50px;
 `;
 
-const SearchButton = styled('button')`
-    border: 2px solid white;
-    border-radius: 25px;
-    background-color: #00000000;
-    color: #FFF;
-    padding: 10px 30px;
-    font-size: 20px;
-`;
+// const SearchButton = styled('button')`
+//     border: 2px solid white;
+//     border-radius: 25px;
+//     background-color: #00000000;
+//     color: #FFF;
+//     padding: 10px 30px;
+//     font-size: 20px;
+// `;
 
-const SearchBox = styled('input')`
-    border: 2px solid white;
-    border-radius: 25px;
-    padding: 10px 20px;
-    margin: 15px;
-    color: gray;
-    font-size: 20px;
-`;
+// const SearchBox = styled('input')`
+//     border: 2px solid white;
+//     border-radius: 25px;
+//     padding: 10px 20px;
+//     margin: 15px;
+//     color: gray;
+//     font-size: 20px;
+// `;
 
 interface Props {
     search: string;
@@ -187,17 +191,36 @@ class Zomato extends React.Component<Props, State> {
         this.config.params.q = this.props.search;
       
         return <>
-        <SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>
 
-        <Select
-            value={selectedOption}
-            onChange={this.handleChange}
-            options={options}
-        />
+        <div style={{display: 'flex'}}>
+            <TextField
+                id="search-field"
+                label="Restaurant Search"
+                // className={classes.textField}
+                // value={this.state.name}
+                onChange={this.setSearch}
+                margin="normal"
+                variant="filled"
+                style={{display: 'inline-block'}}
+            />
 
-        <SearchButton onClick={this.handleClick}>
-            Search
-        </SearchButton>
+            {/*<SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>*/}
+
+            <Select
+                value={selectedOption}
+                onChange={this.handleChange}
+                options={options}
+                style={{display: 'inline-block'}}
+            />
+
+            <Button onClick={this.handleClick}
+                    variant="contained"
+                    color="default"
+                    style={{display: 'inline-block'}}
+            >
+                Search
+            </Button>
+        </div>
         {
             this.state.restaurant.map((item, key) =>
                 <Section key={key}>
