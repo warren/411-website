@@ -125,14 +125,13 @@ export default class Welcome extends React.Component<{}, State> {
                         <ProfilePic proPicURL={window.history.state.state.image} />
                         <Title>Uber Eats Out</Title>
                         {/*<Zomato latitude={42.350560} longitude={-71.100470}/> /!*TODO: Get lat long dynamically*!/*/}
-                        
+                        <LogoutButton onClick={this.logout} style={{float: 'right'}}>Logout</LogoutButton>
                 </Navbar>
                 <Container>
                     <FeaturedText>Hello, {window.history.state.state.name}</FeaturedText>
                     {
                         this.state.errorMsg ? <SuggestionText>{this.state.errorMsg}</SuggestionText> : <SuggestionText>We suggest eating: {this.state.choice}</SuggestionText> 
                     }
-                    <LogoutButton onClick={this.logout}>Logout</LogoutButton>
                     <Section>
                         <Zomato search={this.state.choice}/>
                     </Section>

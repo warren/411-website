@@ -3,10 +3,14 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import Card from './Card';
 import * as NodeCache from 'node-cache';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 import Button from '@material-ui/core/Button';
 import TextField from "@material-ui/core/TextField";
+import Select from '@material-ui/core/Select';
+import MenuItem from "@material-ui/core/MenuItem";
+// import Input from "@material-ui/core/Input";
+// import InputLabel from "@material-ui/core/InputLabel";
 
 // import MenuItem from "@material-ui/core/es/MenuItem";
 
@@ -14,12 +18,7 @@ const API_KEY = process.env.REACT_APP_ZOMATO_API_KEY;
 
 const myCache = new NodeCache();
 
-const options = [ // Units are in meters for Zomato
-    { value: 8046.72, label: '5 miles (~10 min drive)' },
-    { value: 16093.44, label: '10 miles (~20 min drive)' },
-    { value: 24140.16, label: '15 miles (~30 min drive)' },
-    { value: 32186.88, label: '20 miles (~40 min drive)' }
-];
+
 
 interface Location {
     address: string
@@ -44,10 +43,7 @@ interface State {
     restaurant: Restaurant[];
     lat: Number;
     long: Number;
-    selectedOption: {
-        value: number;
-
-    };
+    selectedOption: number;
 }
 
 // interface Props {
@@ -130,9 +126,10 @@ class Zomato extends React.Component<Props, State> {
         }
     }
 
-    public handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
+    public handleChange = event => {
+        console.log(event.target.value);
+        this.setState({selectedOption: event.target.value});
+        // this.setState({ [event.target.name]: event.target.value });
     }
 
     public handleClick = () => {
@@ -144,7 +141,7 @@ class Zomato extends React.Component<Props, State> {
 
         let zamatoCacheKey = String(this.state.lat) + String(this.state.long) + this.config.params.q; // We will use this key to cache API responses
 
-        this.config.params.radius = this.state.selectedOption.value;
+        this.config.params.radius = this.state.selectedOption;
 
         myCache.get( zamatoCacheKey, ( err:any, value:any ) => { // Before calling API, first try to get json response from cache
             if ( !err ) {
@@ -187,7 +184,7 @@ class Zomato extends React.Component<Props, State> {
 
     public render() {
       
-        const { selectedOption } = this.state;
+        // const { selectedOption } = this.state;
         this.config.params.q = this.props.search;
       
         return <>
@@ -201,17 +198,45 @@ class Zomato extends React.Component<Props, State> {
                 onChange={this.setSearch}
                 margin="normal"
                 variant="filled"
-                style={{display: 'inline-block',height: '10px', margin: '0 10px'}}
+                style={{display: 'inline-block', height: '10px', margin: '0 10px'}}
             />
 
             {/*<SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>*/}
 
+            {/*<Select*/}
+                {/*value={selectedOption}*/}
+                {/*onChange={this.handleChange}*/}
+                {/*options={options}*/}
+                {/*style={{display: 'inline-block'}}*/}
+            {/*/>*/}
+
+            {/*<InputLabel htmlFor="restaurant-search">Age</InputLabel>*/}
             <Select
-                value={selectedOption}
+                value={this.state.selectedOption}
                 onChange={this.handleChange}
-                options={options}
-                style={{display: 'inline-block'}}
-            />
+                // inputProps={{
+                //     name: 'age',
+                //     id: 'age-simple',
+                // }}
+                // input={<MenuItem>How far to go?</MenuItem>}
+                // displayEmpty
+                // inputProps={{id: 'restaurant-search'}}
+                // name={"age"}
+
+                // input={<Input name="age" id="age-auto-width" />}
+            >
+                {/*<MenuItem value="" disabled>*/}
+                    {/*Placeholder*/}
+                {/*</MenuItem>*/}
+
+                {/*style={{width: '20%'}}*/}
+
+                <MenuItem value={8046.72}>5 miles (~10 min drive)</MenuItem>
+                <MenuItem value={16093.44}>10 miles (~20 min drive)</MenuItem>
+                <MenuItem value={24140.16}>15 miles (~30 min drive)</MenuItem>
+                <MenuItem value={32186.88}>20 miles (~40 min drive)</MenuItem>
+            </Select>
+
 
             <Button onClick={this.handleClick}
                     variant="contained"
