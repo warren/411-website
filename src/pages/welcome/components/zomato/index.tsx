@@ -10,10 +10,11 @@ const API_KEY = process.env.REACT_APP_ZOMATO_API_KEY;
 
 const myCache = new NodeCache();
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
+const options = [ // Units are in meters for Zomato
+    { value: 8046.72, label: '5 miles (~10 min drive)' },
+    { value: 16093.44, label: '10 miles (~20 min drive)' },
+    { value: 24140.16, label: '15 miles (~30 min drive)' },
+    { value: 32186.88, label: '20 miles (~40 min drive)' }
 ];
 
 interface Location {
@@ -39,7 +40,10 @@ interface State {
     restaurant: Restaurant[];
     lat: Number;
     long: Number;
-    selectedOption: string;
+    selectedOption: {
+        value: number;
+
+    };
 }
 
 // interface Props {
@@ -74,13 +78,17 @@ interface Props {
 }
 
 class Zomato extends React.Component<Props, State> {
+
     public config = {
         headers: {
           'user-key': API_KEY,
         },
         params: {
           count: 50, // limit to 50 objects
-          entity_id: 289, // Boston
+          // entity_id: 289, // Boston
+          lat: -999,
+          long: -999,
+          radius: 9999999,
           q: `${this.props.search}`, // search keyword
         }
     };
@@ -108,6 +116,10 @@ class Zomato extends React.Component<Props, State> {
                     lat: position.coords.latitude,
                     long: position.coords.longitude,
                 });
+                
+                this.config.params.lat = position.coords.latitude;
+                this.config.params.long = position.coords.longitude;
+                
             }, (error) => {
                 this.setState({ lat: 999, long: 999 });
             })
@@ -120,10 +132,15 @@ class Zomato extends React.Component<Props, State> {
     }
 
     public handleClick = () => {
+
+        if (this.state.selectedOption == null) {
+            alert("Select a search radius first!");
+            return;
+        }
+
         let zamatoCacheKey = String(this.state.lat) + String(this.state.long) + this.config.params.q; // We will use this key to cache API responses
 
-
-        // TODO: Decide here what the radius will be based on a button
+        this.config.params.radius = this.state.selectedOption.value;
 
         myCache.get( zamatoCacheKey, ( err:any, value:any ) => { // Before calling API, first try to get json response from cache
             if ( !err ) {
