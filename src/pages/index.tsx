@@ -1,5 +1,5 @@
 import Welcome from './welcome';
-import Ride from './ride-request';
+import Ride from './ride';
 
 export {
     Welcome,
