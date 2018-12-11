@@ -1,8 +1,13 @@
 
 
-const client = require('twilio')(accountSid, authToken);
+// const accountSid = 'AC6331de202bc601ed673dd8899e9b7be8';
+// const authToken = 'a9e5a08f2e16bea8ff212a36752b5cda';
 
-const TWILIO_NUMBER = '+16172497227';
+
+const accountSid = 'AC704ae2f7dceebc107990a030a08f99bd';
+const authToken = '92c486b7b2d75bb993602d93ba607233';
+
+const client = require('twilio')(accountSid, authToken);
 
 const express = require('express');
 const os = require('os');
@@ -22,7 +27,7 @@ app.get('/api/sendSMS', (req, res) => {
     .create({
         body: linkToOwner,
         from: '+16176572429',
-        to: '+12035594231'
+        to: '+17817425803'
     })
     .then(message => console.log(message.sid))
     .done();
@@ -53,7 +58,7 @@ app.get('/api/sendSMS', (req, res) => {
     .create({
         body: linkToFriends,
         from: '+16176572429',
-        to: '+17817425803'
+        to: '+12035594231'
     })
     .then(message => console.log(message.sid))
     .done();

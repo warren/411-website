@@ -18,19 +18,19 @@ const TitleSection = styled('div')`
 `;
 
 const MainHeaderWhite = styled('h1')`
-    color: white;
+    color: #555;
     display: inline;
     font-size: 60px;
 `;
 
 const MainHeaderGreen = styled('h1')`
-    color: white;
+    color: #555;
     display: inline;
     font-size: 60px;
 `;
 
 const MainHeaderBlue = styled('h1')`
-    color: white;
+    color: #555;
     display: inline;
     font-size: 60px;
 `;
@@ -97,7 +97,7 @@ export default class App extends React.Component<{}, State> {
                 <TitleSection>
                     <MainHeaderWhite>Uber</MainHeaderWhite>
                     <MainHeaderGreen>Eats</MainHeaderGreen>
-                    <MainHeaderBlue>Out</MainHeaderBlue>
+                    <MainHeaderBlue>(Out)</MainHeaderBlue>
                 </TitleSection>
 
                 <Section>
@@ -105,7 +105,7 @@ export default class App extends React.Component<{}, State> {
                         <GoogleLogin
                             clientId={API_KEY}
                             render={renderProps => (
-                                <GoogleSignInButton className="btn btn-sm animated-button thar-three" onClick={renderProps.onClick}>LOG IN</GoogleSignInButton>
+                                <GoogleSignInButton className="btn btn-sm animated-button thar-three" onClick={renderProps.onClick}>LOG IN WITH GOOGLE</GoogleSignInButton>
                             )}
                             onSuccess={this.responseSuccess}
                             onFailure={this.responseFailure}

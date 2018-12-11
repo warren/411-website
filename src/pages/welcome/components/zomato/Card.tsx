@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Redirect } from 'react-router';
 
-const place = 'http://localhost:3000/assets/placeholder.jpg';
+const place = 'http://localhost:3000/assets/placeholder2.jpg';
 
 const UBER_CLIENT_ID = process.env.REACT_APP_UBER_CLIENT_ID;
 

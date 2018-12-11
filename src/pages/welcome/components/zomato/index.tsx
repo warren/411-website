@@ -65,7 +65,8 @@ const StyledButton = withStyles({
         height: 48,
         padding: '0 30px',
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-        fontSize: '20px'
+        fontSize: '14px',
+        marginLeft: '5px'
     }
 })(Button);
 
@@ -218,8 +219,9 @@ class Zomato extends React.Component<Props, State> {
                 // value={this.state.name}
                 onChange={this.setSearch}
                 // margin="normal"
-                variant="filled"
+                // variant="filled"
                 style={{display: 'inline-block', height: '10px', margin: '0 10px', fontSize: '20px'}}
+                placeholder={this.props.search}
             />
 
             {/*<SearchBox type="text" onChange={this.setSearch} placeholder={this.props.search}/>*/}

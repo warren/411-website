@@ -14,6 +14,8 @@ var config = { // TODO: Make this imported from a separate file
     messagingSenderId: "356024695903"
 };
 
+firebase.initializeApp(config);
+
 const FeaturedText = styled('h1')`
     text-align: center;
     color: #555;
@@ -90,7 +92,7 @@ export default class Welcome extends React.Component<{}, State> {
     }
 
     public componentDidMount() {
-        firebase.initializeApp(config);
+
         const items = firebase.database().ref(window.history.state.state.token);
         items.on('value', (item) => {
             const object = item.val();
@@ -125,7 +127,7 @@ export default class Welcome extends React.Component<{}, State> {
             <Wrapper>
                 <Navbar>
                         <ProfilePic proPicURL={window.history.state.state.image} />
-                        <Title>Uber Eats (Out)</Title>
+                        <Title>UberEats(Out)</Title>
                         <LogoutButton onClick={this.logout} style={{float: 'right'}}>Logout</LogoutButton>
                 </Navbar>
                 <Container>
